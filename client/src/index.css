@@ -236,3 +236,16 @@
     padding: 0 1rem;
   }
 }
+
+@keyframes coupon-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.coupon-track {
+  animation: coupon-marquee 22s linear infinite;
+}
+
+.coupon-track:hover {
+  animation-play-state: paused;
+}

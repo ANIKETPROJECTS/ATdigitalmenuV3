@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { ArrowLeft, Menu as MenuIcon, X, Tag, ChevronLeft, ChevronRight, Copy, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Menu as MenuIcon, X, Tag, Copy, Check, Calendar, Percent, Info } from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { mainCategories } from "@/lib/menu-categories";
@@ -110,68 +110,172 @@ const coupons = [
   },
 ];
 
-function CouponCard({ coupon }: { coupon: typeof coupons[0] }) {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(coupon.code).catch(() => {});
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: () => void }) {
   return (
-    <div
-      className="relative flex-shrink-0 w-72 rounded-2xl overflow-hidden select-none"
-      style={{
-        background: `linear-gradient(135deg, ${coupon.gradient[0]}, ${coupon.gradient[1]})`,
-        minHeight: "160px",
-      }}
+    <button
+      onClick={onClick}
+      className="relative flex-shrink-0 focus:outline-none active:scale-95 transition-transform duration-150"
+      style={{ width: "260px" }}
       data-testid={`coupon-card-${coupon.id}`}
     >
-      {/* Decorative circles */}
-      <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10" />
-      <div className="absolute -right-4 -bottom-8 w-24 h-24 rounded-full bg-white/10" />
+      {/* Left notch */}
+      <div
+        className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full z-10 pointer-events-none"
+        style={{ backgroundColor: "#151515" }}
+      />
+      {/* Right notch */}
+      <div
+        className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full z-10 pointer-events-none"
+        style={{ backgroundColor: "#151515" }}
+      />
 
-      {/* Tag badge */}
-      <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-white/20 text-white backdrop-blur-sm">
-        {coupon.tag}
-      </div>
-
-      <div className="relative p-4 flex flex-col h-full justify-between" style={{ minHeight: "160px" }}>
-        <div>
-          <div className="flex items-start gap-2 mb-1">
-            <Tag className="w-4 h-4 text-white/80 mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-2xl font-black text-white leading-none" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                {coupon.title}
-              </p>
-              <p className="text-sm text-white/90 font-medium">{coupon.subtitle}</p>
-            </div>
-          </div>
-          <p className="text-xs text-white/70 mt-1 leading-relaxed">{coupon.description}</p>
-        </div>
-
-        {/* Dashed divider */}
-        <div className="my-3 border-t border-dashed border-white/30" />
-
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-[10px] text-white/60 uppercase tracking-wider mb-0.5">Coupon Code</p>
-            <p className="text-base font-black text-white tracking-widest" style={{ fontFamily: "monospace" }}>
-              {coupon.code}
-            </p>
-            <p className="text-[10px] text-white/50 mt-0.5">{coupon.validity}</p>
-          </div>
-          <button
-            onClick={handleCopy}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 active:scale-95"
-            style={{ backgroundColor: "rgba(255,255,255,0.25)", color: "white" }}
-            data-testid={`button-copy-coupon-${coupon.id}`}
+      {/* Ticket body */}
+      <div
+        className="flex items-center gap-3 px-5 py-3.5 rounded-xl border-2 border-dashed"
+        style={{ backgroundColor: "#1E1E1E", borderColor: "#C9A55C66" }}
+      >
+        <Tag className="w-7 h-7 flex-shrink-0" style={{ color: "#C9A55C" }} />
+        <div className="text-left min-w-0">
+          <p
+            className="text-base font-bold leading-snug truncate"
+            style={{ color: "#FFFFFF", fontFamily: "'Lato', sans-serif" }}
           >
-            {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-            {copied ? "Copied!" : "Copy"}
-          </button>
+            {coupon.title}
+          </p>
+          <p
+            className="text-xs leading-snug truncate"
+            style={{ color: "#B8986A", fontFamily: "'Lato', sans-serif" }}
+          >
+            Use {coupon.code} | {coupon.description}
+          </p>
         </div>
       </div>
-    </div>
+    </button>
+  );
+}
+
+function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | null; onClose: () => void }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    if (!coupon) return;
+    navigator.clipboard.writeText(coupon.code).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  return (
+    <AnimatePresence>
+      {coupon && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            className="relative w-full sm:max-w-sm mx-4 sm:mx-auto rounded-2xl overflow-hidden"
+            style={{ backgroundColor: "#1A1A1A", border: "1px solid #B8986A44" }}
+            initial={{ y: 80, opacity: 0, scale: 0.95 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: 80, opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 26, stiffness: 300 }}
+          >
+            {/* Header gradient bar */}
+            <div
+              className="h-1.5 w-full"
+              style={{ background: "linear-gradient(90deg, #B8986A, #C9A55C, #B8986A)" }}
+            />
+
+            <div className="p-5">
+              {/* Close */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 w-7 h-7 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: "#2A2A2A", color: "#888" }}
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+
+              {/* Tag icon + title */}
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: "#C9A55C22" }}
+                >
+                  <Tag className="w-5 h-5" style={{ color: "#C9A55C" }} />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest mb-0.5" style={{ color: "#C9A55C" }}>
+                    {coupon.tag}
+                  </p>
+                  <h3
+                    className="text-2xl font-black leading-none"
+                    style={{ color: "#FFFFFF", fontFamily: "'Cormorant Garamond', serif" }}
+                  >
+                    {coupon.title}
+                  </h3>
+                  <p className="text-sm mt-0.5" style={{ color: "#DCD4C8" }}>
+                    {coupon.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              {/* Dashed divider */}
+              <div className="border-t border-dashed my-4" style={{ borderColor: "#B8986A44" }} />
+
+              {/* Details */}
+              <div className="space-y-2.5 mb-4">
+                <div className="flex items-start gap-2.5">
+                  <Info className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#C9A55C" }} />
+                  <p className="text-sm" style={{ color: "#DCD4C8" }}>{coupon.description}</p>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: "#C9A55C" }} />
+                  <p className="text-sm" style={{ color: "#DCD4C8" }}>{coupon.validity}</p>
+                </div>
+              </div>
+
+              {/* Dashed divider */}
+              <div className="border-t border-dashed mb-4" style={{ borderColor: "#B8986A44" }} />
+
+              {/* Code + Copy */}
+              <div
+                className="flex items-center justify-between rounded-xl px-4 py-3"
+                style={{ backgroundColor: "#242424" }}
+              >
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest mb-0.5" style={{ color: "#888" }}>
+                    Coupon Code
+                  </p>
+                  <p
+                    className="text-lg font-black tracking-widest"
+                    style={{ color: "#C9A55C", fontFamily: "monospace" }}
+                  >
+                    {coupon.code}
+                  </p>
+                </div>
+                <button
+                  onClick={handleCopy}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 active:scale-95"
+                  style={{
+                    backgroundColor: copied ? "#22c55e" : "#C9A55C",
+                    color: "#1A1A1A",
+                  }}
+                  data-testid="button-copy-coupon-modal"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? "Copied!" : "Copy"}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -186,14 +290,7 @@ export default function MenuLanding() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
-  const couponScrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollCoupons = (dir: "left" | "right") => {
-    if (couponScrollRef.current) {
-      const amount = 288;
-      couponScrollRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
-    }
-  };
+  const [selectedCoupon, setSelectedCoupon] = useState<typeof coupons[0] | null>(null);
 
   useEffect(() => {
     const savedCustomer = localStorage.getItem("customer_info");
@@ -456,58 +553,24 @@ export default function MenuLanding() {
             })}
         </div>
 
-        {/* Coupon Carousel Section */}
-        <div className="pt-6 pb-6">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <h2
-                className="text-lg font-bold tracking-wider"
-                style={{ color: "#C9A55C", fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Exclusive Offers
-              </h2>
-              <p className="text-xs" style={{ color: "#888", fontFamily: "'Lato', sans-serif" }}>
-                Tap the code to copy &amp; redeem
-              </p>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => scrollCoupons("left")}
-                className="w-7 h-7 rounded-full flex items-center justify-center transition-colors"
-                style={{ backgroundColor: "#242424", color: "#C9A55C" }}
-                data-testid="button-coupon-prev"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => scrollCoupons("right")}
-                className="w-7 h-7 rounded-full flex items-center justify-center transition-colors"
-                style={{ backgroundColor: "#242424", color: "#C9A55C" }}
-                data-testid="button-coupon-next"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <div
-            ref={couponScrollRef}
-            className="flex gap-3 overflow-x-auto pb-3"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {coupons.map((coupon, index) => (
-              <motion.div
-                key={coupon.id}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.08 }}
-              >
-                <CouponCard coupon={coupon} />
-              </motion.div>
+        {/* Coupon Auto-Scroll Carousel */}
+        <div className="pt-5 pb-6 overflow-hidden">
+          <div className="coupon-track flex gap-6" style={{ width: "max-content" }}>
+            {[...coupons, ...coupons].map((coupon, index) => (
+              <CouponCard
+                key={`${coupon.id}-${index}`}
+                coupon={coupon}
+                onClick={() => setSelectedCoupon(coupon)}
+              />
             ))}
           </div>
         </div>
       </div>
+
+      <CouponDetailModal
+        coupon={selectedCoupon}
+        onClose={() => setSelectedCoupon(null)}
+      />
     </div>
   );
 }
