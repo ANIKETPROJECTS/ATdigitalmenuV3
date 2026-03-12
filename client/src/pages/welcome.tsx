@@ -1,5 +1,4 @@
 import { Utensils, Star } from "lucide-react";
-import { SiInstagram, SiFacebook, SiYoutube } from "react-icons/si";
 import { useLocation } from "wouter";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
@@ -8,6 +7,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageDropdown from "@/components/language-dropdown";
 import logoImage from "@assets/Untitled_design_(20)_1765720426678.png";
 import bgPattern from "@assets/dark_bg_pattern.png";
+import instaImg from "@assets/instagram_(2)_1773345405292.png";
+import fbImg from "@assets/facebook_(2)_1773345408410.png";
+import ytImg from "@assets/youtube_1773345412112.png";
 
 export default function Welcome() {
   const [, setLocation] = useLocation();
@@ -64,24 +66,21 @@ export default function Welcome() {
         <div className="flex gap-3 -mt-14">
           <button
             onClick={() => handleSocialClick("https://www.instagram.com/barrelborn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
-            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
-            style={{ borderColor: "#dcd4c8", backgroundColor: "transparent" }}
+            className="w-11 h-11 flex items-center justify-center transition-opacity hover:opacity-80"
           >
-            <SiInstagram className="w-5 h-5" style={{ color: "#dcd4c8" }} />
+            <img src={instaImg} alt="Instagram" className="w-11 h-11 rounded-xl object-cover" />
           </button>
           <button
             onClick={() => handleSocialClick("https://facebook.com")}
-            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
-            style={{ borderColor: "#dcd4c8", backgroundColor: "transparent" }}
+            className="w-11 h-11 flex items-center justify-center transition-opacity hover:opacity-80"
           >
-            <SiFacebook className="w-5 h-5" style={{ color: "#dcd4c8" }} />
+            <img src={fbImg} alt="Facebook" className="w-11 h-11 rounded-xl object-cover" />
           </button>
           <button
             onClick={() => handleSocialClick("https://youtube.com")}
-            className="w-11 h-11 border rounded-md flex items-center justify-center transition-opacity hover:opacity-80"
-            style={{ borderColor: "#dcd4c8", backgroundColor: "transparent" }}
+            className="w-11 h-11 flex items-center justify-center transition-opacity hover:opacity-80"
           >
-            <SiYoutube className="w-5 h-5" style={{ color: "#dcd4c8" }} />
+            <img src={ytImg} alt="YouTube" className="w-11 h-11 rounded-xl object-cover" />
           </button>
         </div>
 
@@ -89,7 +88,7 @@ export default function Welcome() {
         <button
           onClick={handleExploreMenu}
           className="mt-7 px-10 py-3 font-semibold border-2 rounded-full transition-colors flex items-center gap-2 text-base"
-          style={{ borderColor: "#B8986A", color: "#FFFFFF", backgroundColor: "#B8986A" }}
+          style={{ borderColor: "#FFFFFF", color: "#FFFFFF", backgroundColor: "#B8986A", outline: "2px solid #FFFFFF", outlineOffset: "2px" }}
           data-testid="button-explore-menu"
         >
           <Utensils className="w-5 h-5" style={{ color: "#FFFFFF" }} />
@@ -106,7 +105,13 @@ export default function Welcome() {
             onClick={handleReviewClick}
           >
             {[1, 2, 3, 4, 5].map((star) => (
-              <Star key={star} className="w-8 h-8" style={{ color: "#B8986A", fill: "#B8986A" }} />
+              <div
+                key={star}
+                className="rounded-full flex items-center justify-center"
+                style={{ border: "1px solid #B8986A", padding: "2px" }}
+              >
+                <Star className="w-7 h-7" style={{ color: "#B8986A", fill: "#B8986A" }} />
+              </div>
             ))}
           </div>
         </div>
