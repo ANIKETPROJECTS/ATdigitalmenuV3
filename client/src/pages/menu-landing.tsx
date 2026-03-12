@@ -115,38 +115,58 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
     <button
       onClick={onClick}
       className="relative flex-shrink-0 focus:outline-none active:scale-95 transition-transform duration-150"
-      style={{ width: "260px" }}
+      style={{ width: "78vw", maxWidth: "340px", minWidth: "260px" }}
       data-testid={`coupon-card-${coupon.id}`}
     >
       {/* Left notch */}
       <div
-        className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full z-10 pointer-events-none"
-        style={{ backgroundColor: "#151515" }}
-      />
-      {/* Right notch */}
-      <div
-        className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full z-10 pointer-events-none"
+        className="absolute left-[36%] top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full z-10 pointer-events-none"
         style={{ backgroundColor: "#151515" }}
       />
 
-      {/* Ticket body */}
+      {/* Card body — two-section horizontal layout */}
       <div
-        className="flex items-center gap-3 px-5 py-3.5 rounded-xl border-2 border-dashed"
-        style={{ backgroundColor: "#1E1E1E", borderColor: "#C9A55C66" }}
+        className="flex rounded-2xl overflow-hidden border border-dashed"
+        style={{ borderColor: "#C9A55C55", backgroundColor: "#1A1A1A", minHeight: "90px" }}
       >
-        <Tag className="w-7 h-7 flex-shrink-0" style={{ color: "#C9A55C" }} />
-        <div className="text-left min-w-0">
+        {/* LEFT — discount panel */}
+        <div
+          className="flex flex-col items-center justify-center px-4 py-3 flex-shrink-0"
+          style={{
+            width: "37%",
+            background: "linear-gradient(160deg, #2A2018 0%, #1A1408 100%)",
+            borderRight: "1.5px dashed #C9A55C55",
+          }}
+        >
+          <Tag className="w-4 h-4 mb-1 opacity-70" style={{ color: "#C9A55C" }} />
           <p
-            className="text-base font-bold leading-snug truncate"
-            style={{ color: "#FFFFFF", fontFamily: "'Lato', sans-serif" }}
+            className="text-xl font-black leading-none text-center"
+            style={{
+              color: "#C9A55C",
+              fontFamily: "'Cormorant Garamond', serif",
+              letterSpacing: "-0.5px",
+            }}
           >
             {coupon.title}
           </p>
+          <p className="text-[9px] uppercase tracking-widest mt-1 opacity-60 text-center" style={{ color: "#DCD4C8" }}>
+            {coupon.tag}
+          </p>
+        </div>
+
+        {/* RIGHT — code + condition */}
+        <div className="flex flex-col justify-center px-4 py-3 text-left flex-1 min-w-0">
           <p
-            className="text-xs leading-snug truncate"
-            style={{ color: "#B8986A", fontFamily: "'Lato', sans-serif" }}
+            className="text-base font-black tracking-widest leading-none"
+            style={{ color: "#FFFFFF", fontFamily: "monospace" }}
           >
-            Use {coupon.code} | {coupon.description}
+            {coupon.code}
+          </p>
+          <p className="text-[11px] mt-1.5 leading-snug" style={{ color: "#B8986A" }}>
+            {coupon.subtitle}
+          </p>
+          <p className="text-[10px] mt-1 leading-snug opacity-60" style={{ color: "#DCD4C8" }}>
+            {coupon.description}
           </p>
         </div>
       </div>
@@ -503,6 +523,19 @@ export default function MenuLanding() {
           </div>
         </div>
 
+        {/* Coupon Auto-Scroll Carousel — directly below image banner */}
+        <div className="py-3 overflow-hidden">
+          <div className="coupon-track flex gap-4" style={{ width: "max-content" }}>
+            {[...coupons, ...coupons].map((coupon, index) => (
+              <CouponCard
+                key={`${coupon.id}-${index}`}
+                coupon={coupon}
+                onClick={() => setSelectedCoupon(coupon)}
+              />
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {mainCategories
             .filter((cat) => cat.id !== "wine" && !cat.hidden)
@@ -553,18 +586,6 @@ export default function MenuLanding() {
             })}
         </div>
 
-        {/* Coupon Auto-Scroll Carousel */}
-        <div className="pt-5 pb-6 overflow-hidden">
-          <div className="coupon-track flex gap-6" style={{ width: "max-content" }}>
-            {[...coupons, ...coupons].map((coupon, index) => (
-              <CouponCard
-                key={`${coupon.id}-${index}`}
-                coupon={coupon}
-                onClick={() => setSelectedCoupon(coupon)}
-              />
-            ))}
-          </div>
-        </div>
       </div>
 
       <CouponDetailModal
