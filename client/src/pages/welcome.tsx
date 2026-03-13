@@ -1,5 +1,6 @@
 import { Utensils } from "lucide-react";
 import googleReviewImg from "@assets/Google_Review_(2)_1773394875392.png";
+import bgImg from "@assets/image_1773409826222.png";
 import { useLocation } from "wouter";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
@@ -39,8 +40,16 @@ export default function Welcome() {
   return (
     <div
       className="h-screen w-full overflow-hidden relative flex flex-col"
-      style={{ backgroundColor: "#FFFFFF" }}
+      style={{
+        backgroundColor: "#FFFFFF",
+        backgroundImage: `url(${bgImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
+      {/* Faded overlay to lighten the background */}
+      <div className="absolute inset-0 bg-white/70 pointer-events-none" />
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
       {/* Language dropdown — fixed top right */}
@@ -49,7 +58,7 @@ export default function Welcome() {
       </div>
 
       {/* Main content — fills screen with even distribution */}
-      <div className="flex flex-col items-center w-full flex-1 px-5 pb-3 justify-evenly">
+      <div className="relative z-10 flex flex-col items-center w-full flex-1 px-5 pb-3 justify-evenly">
 
         {/* Digital Menu Logo — negative margins trim internal whitespace */}
         <img
