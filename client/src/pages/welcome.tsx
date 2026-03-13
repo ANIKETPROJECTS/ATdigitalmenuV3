@@ -49,7 +49,7 @@ export default function Welcome() {
       </div>
 
       {/* Main content — tightly packed towards the top */}
-      <div className="flex flex-col items-center w-full flex-1 px-5 pt-1 pb-2 gap-2 justify-start">
+      <div className="flex flex-col items-center w-full flex-1 px-5 py-3 justify-evenly">
 
         {/* Digital Menu Logo — negative margins trim internal whitespace */}
         <img
