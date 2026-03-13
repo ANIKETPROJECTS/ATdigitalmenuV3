@@ -49,7 +49,7 @@ export default function Welcome() {
       </div>
 
       {/* Main content — every element is a direct sibling, no wrappers, no padding */}
-      <div className="flex flex-col items-center w-full flex-1 px-0 pt-0 pb-0 gap-2 justify-start">
+      <div className="flex flex-col items-center w-full flex-1 px-0 pt-0 pb-0 gap-0 justify-start">
 
         {/* Logo — clip wrapper only to remove internal image whitespace */}
         <div className="w-full overflow-hidden flex justify-center" style={{ height: "130px" }}>
@@ -98,14 +98,16 @@ export default function Welcome() {
           </button>
         </div>
 
-        {/* Google Review badge */}
-        <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity">
-          <img
-            src={googleReviewImg}
-            alt="Rate us on Google"
-            className="w-40 h-auto object-contain"
-          />
-        </button>
+        {/* Google Review badge — clip internal whitespace from square image */}
+        <div className="overflow-hidden flex justify-center" style={{ height: "65px" }}>
+          <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity flex-shrink-0">
+            <img
+              src={googleReviewImg}
+              alt="Rate us on Google"
+              style={{ width: "160px", height: "160px", objectFit: "contain", display: "block", marginTop: "-48px" }}
+            />
+          </button>
+        </div>
 
         {/* Connect With Us label */}
         <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "#000000" }}>
