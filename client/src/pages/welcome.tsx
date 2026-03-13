@@ -7,7 +7,7 @@ import { useState, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageDropdown from "@/components/language-dropdown";
 import logoImage from "@assets/Untitled_design_(20)_1765720426678.png";
-import bgPattern from "@assets/dark_bg_pattern.png";
+import digitalMenuImg from "@assets/Untitled_design_(2)_1773391381521.png";
 import instaImg from "@assets/instagram_(2)_1773345405292.png";
 import fbImg from "@assets/facebook_(2)_1773345408410.png";
 import ytImg from "@assets/youtube_1773345412112.png";
@@ -40,12 +40,7 @@ export default function Welcome() {
   return (
     <div
       className="min-h-screen w-full overflow-auto relative"
-      style={{
-        backgroundImage: `url(${bgPattern})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
@@ -57,17 +52,22 @@ export default function Welcome() {
       {/* Main content container — everything centered */}
       <div className="flex flex-col items-center w-full px-6 pt-0 pb-4">
 
-        {/* Logo Image */}
+        {/* Logo + Digital Menu Image */}
         <div className="flex flex-col items-center w-full -mt-12">
           <img
             src={logoImage}
             alt="Barrelborn Dine & Draft"
             className="w-[380px] h-auto"
           />
+          <img
+            src={digitalMenuImg}
+            alt="Digital Menu"
+            className="w-44 h-auto -mt-28"
+          />
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex items-center gap-6 -mt-14">
+        <div className="flex items-center gap-6 mt-1">
           <button
             onClick={() => handleSocialClick("https://www.instagram.com/barrelborn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==")}
             className="flex items-center justify-center transition-opacity hover:opacity-80"
@@ -91,8 +91,8 @@ export default function Welcome() {
         {/* Explore Menu Button */}
         <button
           onClick={handleExploreMenu}
-          className="mt-7 px-10 py-3 font-semibold border-2 rounded-full transition-colors flex items-center gap-2 text-base"
-          style={{ borderColor: "#FFFFFF", color: "#FFFFFF", backgroundColor: "#B8986A", outline: "2px solid #FFFFFF", outlineOffset: "2px" }}
+          className="mt-6 px-10 py-3 font-semibold border-2 rounded-full transition-colors flex items-center gap-2 text-base"
+          style={{ borderColor: "#B8986A", color: "#FFFFFF", backgroundColor: "#B8986A", outline: "2px solid #B8986A", outlineOffset: "2px" }}
           data-testid="button-explore-menu"
         >
           <Utensils className="w-5 h-5" style={{ color: "#FFFFFF" }} />
@@ -101,7 +101,7 @@ export default function Welcome() {
 
         {/* Rating Section */}
         <div className="flex flex-col items-center mt-5">
-          <p className="font-medium text-base mb-2" style={{ color: "#dcd4c8" }}>
+          <p className="font-medium text-base mb-2" style={{ color: "#333333" }}>
             {t.rateOnGoogle}
           </p>
           <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity">
@@ -113,7 +113,7 @@ export default function Welcome() {
           </button>
         </div>
 
-        {/* Info rows — all anchored to a common left edge via inline-flex */}
+        {/* Info rows */}
         <div className="mt-5 flex flex-col items-start gap-4">
 
           {/* Location */}
@@ -122,8 +122,8 @@ export default function Welcome() {
             onClick={() => window.open("https://maps.app.goo.gl/C7K6BijrGrvWTXyBA", "_blank")}
           >
             <img src={mapsImg} alt="Google Maps" className="w-9 h-9 flex-shrink-0 rounded-lg object-cover" />
-            <span className="text-sm font-medium" style={{ color: "#E8DFD1" }}>
-              📍 Click to View Our Location
+            <span className="text-sm font-medium" style={{ color: "#333333" }}>
+              Click to View Our Location
             </span>
           </button>
 
@@ -133,7 +133,7 @@ export default function Welcome() {
             onClick={() => window.open("tel:+918278251111")}
           >
             <img src={callImg} alt="Call" className="w-9 h-9 flex-shrink-0 rounded-full object-cover" />
-            <span className="text-sm font-medium" style={{ color: "#E8DFD1" }}>+91 8278251111</span>
+            <span className="text-sm font-medium" style={{ color: "#333333" }}>+91 8278251111</span>
           </button>
 
           {/* Email */}
@@ -142,7 +142,7 @@ export default function Welcome() {
             onClick={() => window.open("mailto:info@barrelborn.in")}
           >
             <img src={mailImg} alt="Email" className="w-9 h-9 flex-shrink-0 rounded-lg object-cover" />
-            <span className="text-sm font-medium" style={{ color: "#E8DFD1" }}>info@barrelborn.in</span>
+            <span className="text-sm font-medium" style={{ color: "#333333" }}>info@barrelborn.in</span>
           </button>
 
         </div>
@@ -157,7 +157,7 @@ export default function Welcome() {
         </p>
 
         {/* Developer Credit */}
-        <div className="text-center mt-3 mb-4 text-xs" style={{ color: "#E8DFD1" }}>
+        <div className="text-center mt-3 mb-4 text-xs" style={{ color: "#555555" }}>
           <p>{t.developedBy}</p>
           <p
             className="font-medium cursor-pointer"
