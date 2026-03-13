@@ -59,6 +59,17 @@ export default function Welcome() {
           style={{ marginBottom: "-8%" }}
         />
 
+        {/* Explore Menu Button */}
+        <button
+          onClick={handleExploreMenu}
+          className="w-full max-w-xs py-3 font-semibold border-2 rounded-full transition-colors flex items-center justify-center gap-2 text-sm"
+          style={{ borderColor: "#FFF500", color: "#FFFFFF", backgroundColor: "#FFF500", outline: "2px solid #FFF500", outlineOffset: "2px" }}
+          data-testid="button-explore-menu"
+        >
+          <Utensils className="w-4 h-4" style={{ color: "#FFFFFF" }} />
+          <span style={{ color: "#FFFFFF" }}>{t.exploreMenu}</span>
+        </button>
+
         {/* Follow Our Socials — Social Icons */}
         <div className="flex flex-col items-center gap-1.5 w-full">
           <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "#000000" }}>
@@ -85,17 +96,6 @@ export default function Welcome() {
             </button>
           </div>
         </div>
-
-        {/* Explore Menu Button */}
-        <button
-          onClick={handleExploreMenu}
-          className="w-full max-w-xs py-3 font-semibold border-2 rounded-full transition-colors flex items-center justify-center gap-2 text-sm"
-          style={{ borderColor: "#FFF500", color: "#FFFFFF", backgroundColor: "#FFF500", outline: "2px solid #FFF500", outlineOffset: "2px" }}
-          data-testid="button-explore-menu"
-        >
-          <Utensils className="w-4 h-4" style={{ color: "#FFFFFF" }} />
-          <span style={{ color: "#FFFFFF" }}>{t.exploreMenu}</span>
-        </button>
 
         {/* Google Review badge — no label text */}
         <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity">
