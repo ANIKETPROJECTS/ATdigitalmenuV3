@@ -49,14 +49,14 @@ export default function Welcome() {
       </div>
 
       {/* Main content — tightly packed towards the top */}
-      <div className="flex flex-col items-center w-full flex-1 px-5 py-3 justify-evenly">
+      <div className="flex flex-col items-center w-full flex-1 px-5 pt-2 pb-4 gap-4 justify-start">
 
         {/* Digital Menu Logo — negative margins trim internal whitespace */}
         <img
           src={digitalMenuImg}
           alt="Digital Menu"
           className="w-full max-w-xs h-auto object-contain"
-          style={{ marginBottom: "-8%" }}
+          style={{ marginBottom: "-6%" }}
         />
 
         {/* Explore Menu Button */}
