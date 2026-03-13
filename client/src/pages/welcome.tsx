@@ -39,7 +39,7 @@ export default function Welcome() {
   return (
     <div
       className="h-screen w-full overflow-hidden relative flex flex-col"
-      style={{ backgroundColor: "#f8f1de" }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <MediaPreloader onComplete={() => setMediaReady(true)} />
 
@@ -48,21 +48,21 @@ export default function Welcome() {
         <LanguageDropdown />
       </div>
 
-      {/* Main content — fills screen with even distribution */}
-      <div className="flex flex-col items-center w-full flex-1 px-5 pb-3 justify-evenly">
+      {/* Main content — tightly packed towards the top */}
+      <div className="flex flex-col items-center w-full flex-1 px-5 pt-2 pb-2 gap-3 justify-start">
 
         {/* Digital Menu Logo — negative margins trim internal whitespace */}
         <img
           src={digitalMenuImg}
           alt="Digital Menu"
           className="w-full max-w-xs h-auto object-contain"
-          style={{ marginTop: "-18%", marginBottom: "-18%" }}
+          style={{ marginTop: "-14%", marginBottom: "-14%" }}
         />
 
-        {/* Stay Connected Always — Social Icons */}
-        <div className="flex flex-col items-center gap-2 w-full">
+        {/* Follow Our Socials — Social Icons */}
+        <div className="flex flex-col items-center gap-1.5 w-full">
           <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "#000000" }}>
-            Stay Connected Always
+            Follow Our Socials
           </p>
           <div className="flex items-center gap-5">
             <button
@@ -90,10 +90,10 @@ export default function Welcome() {
         <button
           onClick={handleExploreMenu}
           className="px-9 py-2.5 font-semibold border-2 rounded-full transition-colors flex items-center gap-2 text-sm"
-          style={{ borderColor: "#B8986A", color: "#FFFFFF", backgroundColor: "#B8986A", outline: "2px solid #B8986A", outlineOffset: "2px" }}
+          style={{ borderColor: "#FFF500", color: "#000000", backgroundColor: "#FFF500", outline: "2px solid #FFF500", outlineOffset: "2px" }}
           data-testid="button-explore-menu"
         >
-          <Utensils className="w-4 h-4" style={{ color: "#FFFFFF" }} />
+          <Utensils className="w-4 h-4" style={{ color: "#000000" }} />
           <span>{t.exploreMenu}</span>
         </button>
 
@@ -102,35 +102,35 @@ export default function Welcome() {
           <img
             src={googleReviewImg}
             alt="Rate us on Google"
-            className="w-44 h-auto object-contain"
+            className="w-40 h-auto object-contain"
           />
         </button>
 
         {/* Connect With Us — Maps, Call, Mail */}
-        <div className="flex flex-col items-center gap-2 w-full">
+        <div className="flex flex-col items-center gap-1.5 w-full">
           <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "#000000" }}>
             Connect With Us
           </p>
-          <div className="flex items-start justify-center gap-7">
+          <div className="flex items-start justify-center gap-6">
             <button
-              className="flex flex-col items-center gap-1 transition-opacity hover:opacity-80"
+              className="flex flex-col items-center gap-0.5 transition-opacity hover:opacity-80"
               onClick={() => window.open("https://maps.app.goo.gl/C7K6BijrGrvWTXyBA", "_blank")}
             >
-              <img src={mapsImg} alt="Google Maps" className="w-10 h-10 rounded-lg object-cover" />
+              <img src={mapsImg} alt="Google Maps" className="w-9 h-9 rounded-lg object-cover" />
               <span className="text-xs font-medium" style={{ color: "#000000" }}>Location</span>
             </button>
             <button
-              className="flex flex-col items-center gap-1 transition-opacity hover:opacity-80"
+              className="flex flex-col items-center gap-0.5 transition-opacity hover:opacity-80"
               onClick={() => window.open("tel:+918278251111")}
             >
-              <img src={callImg} alt="Call" className="w-10 h-10 rounded-full object-cover" />
+              <img src={callImg} alt="Call" className="w-9 h-9 rounded-full object-cover" />
               <span className="text-xs font-medium" style={{ color: "#000000" }}>Call Us</span>
             </button>
             <button
-              className="flex flex-col items-center gap-1 transition-opacity hover:opacity-80"
+              className="flex flex-col items-center gap-0.5 transition-opacity hover:opacity-80"
               onClick={() => window.open("mailto:info@barrelborn.in")}
             >
-              <img src={mailImg} alt="Email" className="w-10 h-10 rounded-lg object-cover" />
+              <img src={mailImg} alt="Email" className="w-9 h-9 rounded-lg object-cover" />
               <span className="text-xs font-medium" style={{ color: "#000000" }}>Email Us</span>
             </button>
           </div>
