@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Menu as MenuIcon, X, Tag, Copy, Check, Calendar, Percent, Info } from "lucide-react";
+import {
+  ArrowLeft,
+  Menu as MenuIcon,
+  X,
+  Tag,
+  Copy,
+  Check,
+  Calendar,
+  Percent,
+  Info,
+} from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { mainCategories } from "@/lib/menu-categories";
@@ -70,7 +80,7 @@ const coupons = [
   {
     id: 2,
     code: "HAPPYHOUR",
-    title: "Buy 1 Get 1",
+    title: "₹100 Off",
     subtitle: "On all cocktails",
     description: "Every weekday between 5 PM – 8 PM",
     validity: "Valid till 30 Apr 2026",
@@ -109,7 +119,13 @@ const coupons = [
   },
 ];
 
-function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: () => void }) {
+function CouponCard({
+  coupon,
+  onClick,
+}: {
+  coupon: (typeof coupons)[0];
+  onClick: () => void;
+}) {
   return (
     <button
       onClick={onClick}
@@ -134,7 +150,11 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
       {/* Card body — two-section horizontal layout */}
       <div
         className="flex rounded-2xl overflow-hidden"
-        style={{ border: "1.5px solid #D4AF37", minHeight: "96px", boxShadow: "0 4px 20px rgba(212,175,55,0.18)" }}
+        style={{
+          border: "1.5px solid #D4AF37",
+          minHeight: "96px",
+          boxShadow: "0 4px 20px rgba(212,175,55,0.18)",
+        }}
       >
         {/* LEFT — gold gradient discount panel */}
         <div
@@ -145,7 +165,10 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
             borderRight: "1.5px dashed rgba(61,49,0,0.35)",
           }}
         >
-          <Tag className="w-4 h-4 mb-1" style={{ color: "#3D3100", opacity: 0.8 }} />
+          <Tag
+            className="w-4 h-4 mb-1"
+            style={{ color: "#3D3100", opacity: 0.8 }}
+          />
           <p
             className="text-xl font-black leading-none text-center"
             style={{
@@ -156,7 +179,10 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
           >
             {coupon.title}
           </p>
-          <p className="text-[9px] uppercase tracking-widest mt-1.5 text-center font-semibold" style={{ color: "#3D3100", opacity: 0.75 }}>
+          <p
+            className="text-[9px] uppercase tracking-widest mt-1.5 text-center font-semibold"
+            style={{ color: "#3D3100", opacity: 0.75 }}
+          >
             {coupon.tag}
           </p>
         </div>
@@ -172,10 +198,16 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
           >
             {coupon.code}
           </p>
-          <p className="text-[11px] mt-1.5 leading-snug tracking-wide" style={{ color: "#E6C55A", opacity: 0.9 }}>
+          <p
+            className="text-[11px] mt-1.5 leading-snug tracking-wide"
+            style={{ color: "#E6C55A", opacity: 0.9 }}
+          >
             {coupon.subtitle}
           </p>
-          <p className="text-[10px] mt-1 leading-snug tracking-wide" style={{ color: "#DCD4C8", opacity: 0.55 }}>
+          <p
+            className="text-[10px] mt-1 leading-snug tracking-wide"
+            style={{ color: "#DCD4C8", opacity: 0.55 }}
+          >
             {coupon.description}
           </p>
         </div>
@@ -184,7 +216,13 @@ function CouponCard({ coupon, onClick }: { coupon: typeof coupons[0]; onClick: (
   );
 }
 
-function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | null; onClose: () => void }) {
+function CouponDetailModal({
+  coupon,
+  onClose,
+}: {
+  coupon: (typeof coupons)[0] | null;
+  onClose: () => void;
+}) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     if (!coupon) return;
@@ -208,7 +246,10 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
           />
           <motion.div
             className="relative w-full sm:max-w-sm mx-4 sm:mx-auto rounded-2xl overflow-hidden"
-            style={{ backgroundColor: "#1A1A1A", border: "1px solid #B8986A44" }}
+            style={{
+              backgroundColor: "#1A1A1A",
+              border: "1px solid #B8986A44",
+            }}
             initial={{ y: 80, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 80, opacity: 0, scale: 0.95 }}
@@ -217,7 +258,9 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
             {/* Header gradient bar */}
             <div
               className="h-1.5 w-full"
-              style={{ background: "linear-gradient(90deg, #B8986A, #C9A55C, #B8986A)" }}
+              style={{
+                background: "linear-gradient(90deg, #B8986A, #C9A55C, #B8986A)",
+              }}
             />
 
             <div className="p-5">
@@ -239,12 +282,18 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
                   <Tag className="w-5 h-5" style={{ color: "#C9A55C" }} />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-widest mb-0.5" style={{ color: "#C9A55C" }}>
+                  <p
+                    className="text-xs uppercase tracking-widest mb-0.5"
+                    style={{ color: "#C9A55C" }}
+                  >
                     {coupon.tag}
                   </p>
                   <h3
                     className="text-2xl font-black leading-none"
-                    style={{ color: "#FFFFFF", fontFamily: "'Cormorant Garamond', serif" }}
+                    style={{
+                      color: "#FFFFFF",
+                      fontFamily: "'Cormorant Garamond', serif",
+                    }}
                   >
                     {coupon.title}
                   </h3>
@@ -255,22 +304,38 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
               </div>
 
               {/* Dashed divider */}
-              <div className="border-t border-dashed my-4" style={{ borderColor: "#B8986A44" }} />
+              <div
+                className="border-t border-dashed my-4"
+                style={{ borderColor: "#B8986A44" }}
+              />
 
               {/* Details */}
               <div className="space-y-2.5 mb-4">
                 <div className="flex items-start gap-2.5">
-                  <Info className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#C9A55C" }} />
-                  <p className="text-sm" style={{ color: "#DCD4C8" }}>{coupon.description}</p>
+                  <Info
+                    className="w-4 h-4 mt-0.5 flex-shrink-0"
+                    style={{ color: "#C9A55C" }}
+                  />
+                  <p className="text-sm" style={{ color: "#DCD4C8" }}>
+                    {coupon.description}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: "#C9A55C" }} />
-                  <p className="text-sm" style={{ color: "#DCD4C8" }}>{coupon.validity}</p>
+                  <Calendar
+                    className="w-4 h-4 flex-shrink-0"
+                    style={{ color: "#C9A55C" }}
+                  />
+                  <p className="text-sm" style={{ color: "#DCD4C8" }}>
+                    {coupon.validity}
+                  </p>
                 </div>
               </div>
 
               {/* Dashed divider */}
-              <div className="border-t border-dashed mb-4" style={{ borderColor: "#B8986A44" }} />
+              <div
+                className="border-t border-dashed mb-4"
+                style={{ borderColor: "#B8986A44" }}
+              />
 
               {/* Code + Copy */}
               <div
@@ -278,7 +343,10 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
                 style={{ backgroundColor: "#242424" }}
               >
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest mb-0.5" style={{ color: "#888" }}>
+                  <p
+                    className="text-[10px] uppercase tracking-widest mb-0.5"
+                    style={{ color: "#888" }}
+                  >
                     Coupon Code
                   </p>
                   <p
@@ -297,7 +365,11 @@ function CouponDetailModal({ coupon, onClose }: { coupon: typeof coupons[0] | nu
                   }}
                   data-testid="button-copy-coupon-modal"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? (
+                    <Check className="w-3.5 h-3.5" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
                   {copied ? "Copied!" : "Copy"}
                 </button>
               </div>
@@ -320,8 +392,12 @@ export default function MenuLanding() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
-  const [selectedCoupon, setSelectedCoupon] = useState<typeof coupons[0] | null>(null);
-  const [lightboxImage, setLightboxImage] = useState<typeof promotionalImages[0] | null>(null);
+  const [selectedCoupon, setSelectedCoupon] = useState<
+    (typeof coupons)[0] | null
+  >(null);
+  const [lightboxImage, setLightboxImage] = useState<
+    (typeof promotionalImages)[0] | null
+  >(null);
   const lightboxPaused = useRef(false);
   const swipeTouchX = useRef<number | null>(null);
 
@@ -364,7 +440,9 @@ export default function MenuLanding() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % promotionalImages.length);
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % promotionalImages.length,
+      );
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -375,7 +453,10 @@ export default function MenuLanding() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#3D3100" }}>
-      <header className="sticky top-0 z-30 elegant-shadow" style={{ backgroundColor: "#3D3100" }}>
+      <header
+        className="sticky top-0 z-30 elegant-shadow"
+        style={{ backgroundColor: "#3D3100" }}
+      >
         <div className="container mx-auto px-2 sm:px-4 py-5 sm:py-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
@@ -499,58 +580,49 @@ export default function MenuLanding() {
       </Dialog>
 
       <div className="container mx-auto px-3 sm:px-4 py-2">
+        {/* Gold gradient border wrapper for carousel */}
         <div
-          className="relative rounded-xl overflow-hidden mb-3 cursor-pointer group"
-          style={{ height: "280px" }}
-          onClick={() => setLightboxImage(promotionalImages[currentImageIndex])}
-          data-testid="banner-image-carousel"
+          className="rounded-xl p-[2px] mb-3"
+          style={{ background: "linear-gradient(90deg, #D4AF37, #E6C55A)" }}
         >
-          {promotionalImages.map((image, index) => (
-            <motion.div
-              key={image.id}
-              className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </motion.div>
-          ))}
-
-          {/* Tap-to-expand hint */}
-          <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-            </svg>
-            <span className="text-[10px] text-white font-medium">View</span>
-          </div>
-
           <div
-            className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
-            style={{ background: "linear-gradient(to top, rgba(21,21,21,0.6), transparent)" }}
-          />
-
-          <div className="absolute bottom-2.5 left-1/2 transform -translate-x-1/2 flex space-x-1.5">
-            {promotionalImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(index); }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex ? "bg-white w-5" : "bg-white/50 w-1.5"
-                }`}
-                data-testid={`carousel-dot-${index}`}
-              />
+            className="relative rounded-[10px] overflow-hidden cursor-pointer group"
+            style={{ height: "280px" }}
+            onClick={() => setLightboxImage(promotionalImages[currentImageIndex])}
+            data-testid="banner-image-carousel"
+          >
+            {promotionalImages.map((image, index) => (
+              <motion.div
+                key={image.id}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </motion.div>
             ))}
+
+            <div
+              className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(21,21,21,0.6), transparent)",
+              }}
+            />
           </div>
         </div>
 
         {/* Coupon Auto-Scroll Carousel — directly below image banner */}
         <div className="py-3 mb-3 overflow-hidden">
-          <div className="coupon-track flex gap-4" style={{ width: "max-content" }}>
+          <div
+            className="coupon-track flex gap-4"
+            style={{ width: "max-content" }}
+          >
             {[...coupons, ...coupons].map((coupon, index) => (
               <CouponCard
                 key={`${coupon.id}-${index}`}
@@ -566,51 +638,59 @@ export default function MenuLanding() {
             .filter((cat) => cat.id !== "wine" && !cat.hidden)
             .map((category, index) => {
               const translationKey = categoryTranslationMap[category.id];
-              const label = translationKey ? t[translationKey] : category.displayLabel;
+              const label = translationKey
+                ? t[translationKey]
+                : category.displayLabel;
               return (
-                <motion.button
+                <motion.div
                   key={category.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleCategoryClick(category.id)}
-                  className="relative rounded-lg overflow-hidden group"
-                  style={{ aspectRatio: "1/1.05" }}
-                  data-testid={`tile-${category.id}`}
+                  className="rounded-lg p-[2px]"
+                  style={{
+                    background: "linear-gradient(90deg, #D4AF37, #E6C55A)",
+                    aspectRatio: "1/1.05",
+                  }}
                 >
-                  <img
-                    src={
-                      failedImages.has(category.id)
-                        ? fallbackImg
-                        : categoryImages[category.id]
-                    }
-                    alt={label as string}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={() => {
-                      setFailedImages((prev) => new Set(prev).add(category.id));
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-end p-2 pb-3">
-                    <h3
-                      className="text-sm sm:text-base md:text-lg font-semibold tracking-widest uppercase text-center"
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        color: "#FFFFFF",
-                        textShadow: "0 2px 8px rgba(0,0,0,0.8)",
-                        letterSpacing: "0.15em",
+                  <button
+                    onClick={() => handleCategoryClick(category.id)}
+                    className="relative rounded-[6px] overflow-hidden group w-full h-full"
+                    data-testid={`tile-${category.id}`}
+                  >
+                    <img
+                      src={
+                        failedImages.has(category.id)
+                          ? fallbackImg
+                          : categoryImages[category.id]
+                      }
+                      alt={label as string}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={() => {
+                        setFailedImages((prev) => new Set(prev).add(category.id));
                       }}
-                    >
-                      {label}
-                    </h3>
-                  </div>
-                </motion.button>
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-end p-2 pb-3">
+                      <h3
+                        className="text-sm sm:text-base md:text-lg font-semibold tracking-widest uppercase text-center"
+                        style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          color: "#FFFFFF",
+                          textShadow: "0 2px 8px rgba(0,0,0,0.8)",
+                          letterSpacing: "0.15em",
+                        }}
+                      >
+                        {label}
+                      </h3>
+                    </div>
+                  </button>
+                </motion.div>
               );
             })}
         </div>
-
       </div>
 
       <CouponDetailModal
@@ -646,13 +726,26 @@ export default function MenuLanding() {
               style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
               onClick={(e) => {
                 e.stopPropagation();
-                const prev = (currentImageIndex - 1 + promotionalImages.length) % promotionalImages.length;
+                const prev =
+                  (currentImageIndex - 1 + promotionalImages.length) %
+                  promotionalImages.length;
                 setCurrentImageIndex(prev);
                 setLightboxImage(promotionalImages[prev]);
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
             <button
@@ -665,8 +758,19 @@ export default function MenuLanding() {
                 setLightboxImage(promotionalImages[next]);
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
 
@@ -696,7 +800,9 @@ export default function MenuLanding() {
                       setLightboxImage(promotionalImages[idx]);
                     }}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      idx === currentImageIndex ? "bg-white w-5" : "bg-white/40 w-1.5"
+                      idx === currentImageIndex
+                        ? "bg-white w-5"
+                        : "bg-white/40 w-1.5"
                     }`}
                   />
                 ))}
