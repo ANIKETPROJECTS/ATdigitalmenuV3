@@ -649,15 +649,18 @@ export default function MenuLanding() {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="rounded-lg p-[2px]"
                   style={{
                     background: "linear-gradient(90deg, #D4AF37, #E6C55A)",
+                    padding: "2px",
+                    borderRadius: "10px",
                     aspectRatio: "1/1.05",
+                    display: "flex",
                   }}
                 >
                   <button
                     onClick={() => handleCategoryClick(category.id)}
-                    className="relative rounded-[6px] overflow-hidden group w-full h-full"
+                    className="relative overflow-hidden group flex-1"
+                    style={{ borderRadius: "8px", minHeight: 0 }}
                     data-testid={`tile-${category.id}`}
                   >
                     <img
