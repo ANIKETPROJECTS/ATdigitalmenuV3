@@ -1,5 +1,5 @@
-import { Utensils } from "lucide-react";
-import googleReviewImg from "@assets/Google_Review_(2)_1773394875392.png";
+import googleReviewImg from "@assets/Google_Review_(1)_1773512308220.png";
+import spoonForkImg from "@assets/19_1773512274982.png";
 import { useLocation } from "wouter";
 import { useWelcomeAudio } from "../hooks/useWelcomeAudio";
 import { MediaPreloader } from "../components/media-preloader";
@@ -56,19 +56,19 @@ export default function Welcome() {
           <img
             src={atDigitalMenuLogo}
             alt="AT Digital Menu"
-            style={{ width: "280px", objectFit: "contain" }}
+            style={{ width: "360px", objectFit: "contain" }}
           />
         </div>
 
         {/* Explore button */}
         <button
           onClick={handleExploreMenu}
-          className="w-full max-w-xs py-3 font-normal border-2 rounded-full transition-colors flex items-center justify-center gap-2 text-sm"
-          style={{ borderColor: "#FFF500", color: "#FFFFFF", backgroundColor: "#FFF500", outline: "2px solid #FFF500", outlineOffset: "2px" }}
+          className="w-full max-w-xs py-3 font-semibold rounded-full transition-opacity hover:opacity-90 flex items-center justify-center gap-2 text-sm"
+          style={{ background: "linear-gradient(90deg, #d4af37, #e6c55a)", border: "none", color: "#3D3100" }}
           data-testid="button-explore-menu"
         >
-          <Utensils className="w-4 h-4" style={{ color: "#FFFFFF" }} />
-          <span style={{ color: "#FFFFFF" }}>{t.exploreMenu}</span>
+          <img src={spoonForkImg} alt="" className="w-5 h-5 object-contain" style={{ mixBlendMode: "multiply" }} />
+          <span style={{ color: "#3D3100" }}>{t.exploreMenu}</span>
         </button>
 
         {/* Follow Our Socials label */}
@@ -98,16 +98,19 @@ export default function Welcome() {
           </button>
         </div>
 
-        {/* Google Review badge — clip internal whitespace from square image */}
-        <div className="overflow-hidden flex justify-center" style={{ height: "65px" }}>
-          <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity flex-shrink-0">
-            <img
-              src={googleReviewImg}
-              alt="Rate us on Google"
-              style={{ width: "160px", height: "160px", objectFit: "contain", display: "block", marginTop: "-48px" }}
-            />
-          </button>
-        </div>
+        {/* Click to Rate Us label */}
+        <p className="text-xs font-normal tracking-widest" style={{ color: "#FFFFFF" }}>
+          Click To Rate Us
+        </p>
+
+        {/* Google Review badge */}
+        <button onClick={handleReviewClick} className="hover:opacity-80 transition-opacity flex-shrink-0">
+          <img
+            src={googleReviewImg}
+            alt="Rate us on Google"
+            style={{ width: "180px", objectFit: "contain", display: "block" }}
+          />
+        </button>
 
         {/* Connect With Us label */}
         <p className="text-xs font-normal tracking-widest" style={{ color: "#FFFFFF" }}>

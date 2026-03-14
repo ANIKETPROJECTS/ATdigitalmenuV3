@@ -43,16 +43,16 @@ export default function LanguageDropdown({ className = "" }: LanguageDropdownPro
         aria-label="Select language"
       >
         {isTranslating ? (
-          <Loader2 className="w-7 h-7 animate-spin" style={{ color: "#000000" }} />
+          <Loader2 className="w-7 h-7 animate-spin" style={{ color: "#FFFFFF" }} />
         ) : (
           <img src={googleTranslateImg} alt="Translate" className="w-7 h-7 object-contain" />
         )}
-        <span className="text-base font-semibold tracking-wide" style={{ color: "#000000" }}>
+        <span className="text-base font-semibold tracking-wide" style={{ color: "#FFFFFF" }}>
           {current.native}
         </span>
         <ChevronDown
           className="w-5 h-5 transition-transform duration-200"
-          style={{ color: "#000000", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+          style={{ color: "#FFFFFF", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
         />
       </button>
 
