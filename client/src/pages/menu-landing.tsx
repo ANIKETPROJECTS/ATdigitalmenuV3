@@ -13,8 +13,6 @@ import {
   Info,
   Star,
   ChefHat,
-  Layers,
-  ChevronRight,
 } from "lucide-react";
 import type { MenuItem } from "@shared/schema";
 import { useLocation } from "wouter";
@@ -395,7 +393,8 @@ export default function MenuLanding() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const [waiterCalled, setWaiterCalled] = useState(false);
   const [showSmartMenu, setShowSmartMenu] = useState(false);
-  const [activeSmartSection, setActiveSmartSection] = useState<"today" | "chef" | "combo">("today");
+  const [activeSmartSection, setActiveSmartSection] = useState<"today" | "chef">("today");
+  const [smartVegFilter, setSmartVegFilter] = useState<"all" | "veg" | "non-veg">("all");
 
   const { data: allMenuItems = [] } = useQuery<MenuItem[]>({
     queryKey: ["/api/menu-items"],
@@ -406,11 +405,17 @@ export default function MenuLanding() {
     const available = allMenuItems.filter(i => i.isAvailable);
     const shuffled = [...available].sort(() => 0.5 - Math.random());
     return {
-      today: shuffled.slice(0, 6),
-      chef: shuffled.slice(6, 12),
-      combo: shuffled.slice(12, 18),
+      today: shuffled.slice(0, 10),
+      chef: shuffled.slice(10, 20),
     };
   }, [allMenuItems]);
+
+  const smartFilteredItems = useMemo(() => {
+    const items = smartSections[activeSmartSection] || [];
+    if (smartVegFilter === "veg") return items.filter(i => i.isVeg);
+    if (smartVegFilter === "non-veg") return items.filter(i => !i.isVeg);
+    return items;
+  }, [smartSections, activeSmartSection, smartVegFilter]);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [showPopup, setShowPopup] = useState(false);
   const [customerName, setCustomerName] = useState("");
@@ -865,12 +870,12 @@ export default function MenuLanding() {
         <AnimatePresence>
           {showSmartMenu && (
             <motion.div
-              className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl overflow-hidden"
+              className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl flex flex-col"
               style={{
                 backgroundColor: "#1A1408",
                 border: "1px solid rgba(212,175,55,0.3)",
                 borderBottom: "none",
-                maxHeight: "78vh",
+                height: "96dvh",
               }}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -878,12 +883,12 @@ export default function MenuLanding() {
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
             >
               {/* Handle */}
-              <div className="flex justify-center pt-3 pb-1">
+              <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
                 <div className="w-10 h-1 rounded-full" style={{ backgroundColor: "rgba(212,175,55,0.3)" }} />
               </div>
 
               {/* Header */}
-              <div className="px-5 pt-2 pb-4 flex items-center justify-between">
+              <div className="px-5 pt-2 pb-3 flex items-center justify-between flex-shrink-0">
                 <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
@@ -916,16 +921,15 @@ export default function MenuLanding() {
               </div>
 
               {/* Section Tabs */}
-              <div className="flex gap-2 px-5 pb-4 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+              <div className="flex gap-2 px-5 pb-3 flex-shrink-0" style={{ scrollbarWidth: "none" }}>
                 {[
                   { key: "today", label: "Today's Special", icon: <Star className="w-3.5 h-3.5" /> },
                   { key: "chef", label: "Chef's Special", icon: <ChefHat className="w-3.5 h-3.5" /> },
-                  { key: "combo", label: "Combo Picks", icon: <Layers className="w-3.5 h-3.5" /> },
                 ].map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => setActiveSmartSection(tab.key as typeof activeSmartSection)}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase whitespace-nowrap transition-all duration-200 flex-shrink-0"
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase whitespace-nowrap transition-all duration-200 flex-shrink-0"
                     style={
                       activeSmartSection === tab.key
                         ? {
@@ -948,46 +952,69 @@ export default function MenuLanding() {
                 ))}
               </div>
 
-              {/* Section Description */}
-              <div className="px-5 pb-3">
+              {/* Veg / Non-Veg Filter + Description Row */}
+              <div className="px-5 pb-3 flex items-center justify-between flex-shrink-0">
                 <p
                   className="text-[11px] tracking-wide"
                   style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  {activeSmartSection === "today" && "🌟 Freshly curated picks for today — tried and loved"}
-                  {activeSmartSection === "chef" && "👨‍🍳 Personally handpicked by our head chef"}
-                  {activeSmartSection === "combo" && "🍽️ Best value dishes — great taste, great price"}
+                  {activeSmartSection === "today" ? "🌟 Tried and loved picks for today" : "👨‍🍳 Handpicked by our head chef"}
                 </p>
+                <div
+                  className="inline-flex rounded-full p-0.5 items-center gap-0 flex-shrink-0"
+                  style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}
+                >
+                  {[
+                    { key: "all", label: "All" },
+                    { key: "veg", label: "Veg" },
+                    { key: "non-veg", label: "Non-Veg" },
+                  ].map((f) => (
+                    <button
+                      key={f.key}
+                      onClick={() => setSmartVegFilter(f.key as typeof smartVegFilter)}
+                      className="px-2 py-0.5 text-[10px] font-semibold rounded-full transition-all duration-200"
+                      style={
+                        smartVegFilter === f.key
+                          ? f.key === "veg"
+                            ? { backgroundColor: "#22C55E", color: "white" }
+                            : f.key === "non-veg"
+                            ? { backgroundColor: "#EF4444", color: "white" }
+                            : { backgroundColor: "white", color: "#1A1408" }
+                          : { color: "#C9A55C" }
+                      }
+                      data-testid={`smart-filter-${f.key}`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Items Horizontal Scroll */}
-              <div
-                className="overflow-y-auto pb-6"
-                style={{ maxHeight: "calc(78vh - 200px)" }}
-              >
+              {/* Scrollable Items Grid */}
+              <div className="overflow-y-auto flex-1 pb-8 px-5">
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={activeSmartSection}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                    className="grid grid-cols-2 gap-3 px-5"
+                    key={activeSmartSection + smartVegFilter}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="grid grid-cols-2 gap-3"
                   >
-                    {smartSections[activeSmartSection].length === 0
-                      ? Array.from({ length: 4 }).map((_, i) => (
-                          <div
-                            key={i}
-                            className="rounded-xl animate-pulse"
-                            style={{ backgroundColor: "rgba(212,175,55,0.08)", height: 180 }}
-                          />
-                        ))
-                      : smartSections[activeSmartSection].map((item, idx) => (
+                    {smartFilteredItems.length === 0
+                      ? (
+                        <div className="col-span-2 flex flex-col items-center justify-center py-16 text-center">
+                          <p className="text-sm tracking-widest uppercase" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
+                            No items found
+                          </p>
+                        </div>
+                      )
+                      : smartFilteredItems.map((item, idx) => (
                           <motion.div
                             key={item._id?.toString() || idx}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.05 }}
+                            transition={{ delay: idx * 0.04 }}
                             className="rounded-xl overflow-hidden"
                             style={{
                               backgroundColor: "rgba(212,175,55,0.07)",
@@ -995,15 +1022,12 @@ export default function MenuLanding() {
                             }}
                             data-testid={`smart-item-${item._id?.toString()}`}
                           >
-                            {/* Image */}
                             <div className="relative aspect-[4/3] overflow-hidden">
                               <img
                                 src={item.image || fallbackImg}
                                 alt={item.name}
                                 className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  (e.target as HTMLImageElement).src = fallbackImg;
-                                }}
+                                onError={(e) => { (e.target as HTMLImageElement).src = fallbackImg; }}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                               <div
@@ -1012,7 +1036,6 @@ export default function MenuLanding() {
                                 }`}
                               />
                             </div>
-                            {/* Info */}
                             <div className="p-2">
                               <p
                                 className="text-[11px] font-semibold tracking-wide uppercase leading-tight line-clamp-2 mb-1"
