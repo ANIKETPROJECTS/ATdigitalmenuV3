@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { mainCategories } from "@/lib/menu-categories";
 import { categoryTranslationMap } from "@/lib/translations";
 import HamburgerMenu from "@/components/hamburger-menu";
+import ProductCard from "@/components/product-card";
+import DishDetailModal from "@/components/dish-detail-modal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Dialog,
@@ -384,6 +386,7 @@ export default function MenuLanding() {
   const [showSmartMenu, setShowSmartMenu] = useState(false);
   const [activeSmartSection, setActiveSmartSection] = useState<"today" | "chef">("today");
   const [smartVegFilter, setSmartVegFilter] = useState<"all" | "veg" | "non-veg">("all");
+  const [selectedSmartItem, setSelectedSmartItem] = useState<MenuItem | null>(null);
 
   const { data: allMenuItems = [] } = useQuery<MenuItem[]>({
     queryKey: ["/api/menu-items"],
@@ -1106,43 +1109,9 @@ export default function MenuLanding() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.04 }}
-                            className="rounded-xl overflow-hidden"
-                            style={{
-                              backgroundColor: "rgba(212,175,55,0.07)",
-                              border: "1px solid rgba(212,175,55,0.18)",
-                            }}
                             data-testid={`smart-item-${item._id?.toString()}`}
                           >
-                            <div className="relative aspect-[4/3] overflow-hidden">
-                              <img
-                                src={item.image || fallbackImg}
-                                alt={item.name}
-                                className="w-full h-full object-cover"
-                                onError={(e) => { (e.target as HTMLImageElement).src = fallbackImg; }}
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                              <div
-                                className={`absolute top-2 right-2 w-3.5 h-3.5 rounded-full border ${
-                                  item.isVeg ? "bg-green-500 border-green-300" : "bg-red-500 border-red-300"
-                                }`}
-                              />
-                            </div>
-                            <div className="p-2">
-                              <p
-                                className="text-[11px] font-semibold tracking-wide uppercase leading-tight line-clamp-2 mb-1"
-                                style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
-                              >
-                                {item.name}
-                              </p>
-                              <p
-                                className="text-xs font-bold"
-                                style={{ color: "#E6C55A", fontFamily: "'DM Sans', sans-serif" }}
-                              >
-                                {typeof item.price === "string" && item.price.includes("|")
-                                  ? `₹${item.price.split("|")[0].trim()}`
-                                  : `₹${item.price}`}
-                              </p>
-                            </div>
+                            <ProductCard item={item} onClick={(dish) => setSelectedSmartItem(dish)} />
                           </motion.div>
                         ))}
                   </motion.div>
@@ -1151,6 +1120,9 @@ export default function MenuLanding() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Dish Detail Modal for Smart Picks */}
+        <DishDetailModal item={selectedSmartItem} onClose={() => setSelectedSmartItem(null)} />
 
         {/* Floating Chef Button — bottom left */}
         {!showHamburgerMenu && <motion.button
