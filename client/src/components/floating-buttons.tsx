@@ -245,31 +245,7 @@ export default function FloatingButtons() {
       </motion.button>
 
       {/* ── Call Waiter ── */}
-      <div className="fixed bottom-6 right-4 z-40 flex flex-col items-end gap-2">
-        <AnimatePresence>
-          {waiterCalled && (
-            <motion.button
-              key="cancel"
-              initial={{ opacity: 0, y: 8, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setWaiterCalled(false)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase"
-              style={{
-                backgroundColor: "rgba(30,20,0,0.92)",
-                border: "1px solid rgba(212,175,55,0.4)",
-                color: "#DCD4C8",
-                fontFamily: "'DM Sans', sans-serif",
-                backdropFilter: "blur(8px)",
-              }}
-              data-testid="button-cancel-waiter"
-            >
-              Cancel
-            </motion.button>
-          )}
-        </AnimatePresence>
-
+      <div className="fixed bottom-6 right-4 z-40">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -311,13 +287,13 @@ export default function FloatingButtons() {
                   className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
                   style={{ color: "#4ade80", fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Waiter Called ✓
+                  Waiter Called
                 </span>
                 <span
                   className="text-[9px] tracking-wide"
-                  style={{ color: "rgba(74,222,128,0.7)", fontFamily: "'DM Sans', sans-serif" }}
+                  style={{ color: "rgba(74,222,128,0.6)", fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  On the way!
+                  Tap to dismiss
                 </span>
               </motion.div>
             ) : (
