@@ -151,44 +151,6 @@ function CouponCard({
           boxShadow: "0 4px 20px rgba(212,175,55,0.18)",
         }}
       >
-        {/* Notch top — half-circle cut at top of divider */}
-        <div
-          className="absolute z-10 pointer-events-none rounded-full"
-          style={{
-            left: "37%",
-            top: -9,
-            width: 18,
-            height: 18,
-            backgroundColor: "#3D3100",
-            transform: "translateX(-50%)",
-          }}
-        />
-        {/* Notch middle — full punch hole */}
-        <div
-          className="absolute z-10 pointer-events-none rounded-full"
-          style={{
-            left: "37%",
-            top: "50%",
-            width: 20,
-            height: 20,
-            backgroundColor: "#3D3100",
-            border: "1.5px solid #D4AF37",
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-        {/* Notch bottom — half-circle cut at bottom of divider */}
-        <div
-          className="absolute z-10 pointer-events-none rounded-full"
-          style={{
-            left: "37%",
-            bottom: -9,
-            width: 18,
-            height: 18,
-            backgroundColor: "#3D3100",
-            transform: "translateX(-50%)",
-          }}
-        />
-
         {/* LEFT — gold gradient discount panel */}
         <div
           className="flex flex-col items-center justify-center px-4 py-3 flex-shrink-0"
