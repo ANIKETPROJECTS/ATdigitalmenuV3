@@ -18,7 +18,7 @@ const NUTRITION_PLACEHOLDER = [
   { label: "Sodium", value: "—" },
 ];
 
-const ALLERGEN_PLACEHOLDER = ["Information not available for this item."];
+const ALLERGEN_PLACEHOLDER = "Information not available for this item.";
 const INGREDIENTS_PLACEHOLDER = "Detailed ingredient list not available.";
 const CUSTOMIZATION_PLACEHOLDER = [
   "Spice level: Mild / Medium / Hot",
@@ -36,7 +36,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
 
   const priceDisplay =
     typeof item.price === "string" && item.price.includes("|")
-      ? item.price.split("|").map((p: string) => `₹${p.trim()}`).join(" | ")
+      ? item.price.split("|").map((p: string) => `₹${p.trim()}`).join("  |  ")
       : `₹${item.price}`;
 
   return (
@@ -48,109 +48,186 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
+          {/* Backdrop */}
           <motion.div
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/85 backdrop-blur-md"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
 
+          {/* Modal Sheet */}
           <motion.div
-            className="relative w-full sm:max-w-md max-h-[92vh] sm:max-h-[88vh] overflow-y-auto rounded-t-3xl sm:rounded-2xl"
-            style={{ backgroundColor: "#1A1408", border: "1px solid rgba(212,175,55,0.3)" }}
+            className="relative w-full sm:max-w-md overflow-y-auto rounded-t-3xl sm:rounded-2xl"
+            style={{
+              backgroundColor: "#1A1408",
+              border: "1px solid rgba(212,175,55,0.35)",
+              maxHeight: "92vh",
+            }}
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
           >
+            {/* Drag handle */}
             <div className="flex justify-center pt-3 pb-1 sm:hidden">
-              <div className="w-10 h-1 rounded-full" style={{ backgroundColor: "rgba(212,175,55,0.3)" }} />
+              <div className="w-12 h-1 rounded-full" style={{ backgroundColor: "rgba(212,175,55,0.35)" }} />
             </div>
 
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-              style={{ backgroundColor: "rgba(0,0,0,0.6)", color: "#DCD4C8" }}
-              data-testid="button-close-dish-modal"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="relative w-full aspect-video overflow-hidden">
+            {/* Hero Image */}
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/3" }}>
               <img
                 src={imageUrl}
                 alt={item.name}
                 className="w-full h-full object-cover"
                 onError={() => setImgError(true)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1408] via-transparent to-transparent" />
-
+              {/* Layered gradient — heavier at bottom for name legibility */}
               <div
-                className={`absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold ${
-                  item.isVeg ? "bg-green-600 text-white" : "bg-red-600 text-white"
-                }`}
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 40%, rgba(26,20,8,0.85) 80%, rgba(26,20,8,1) 100%)",
+                }}
+              />
+
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.55)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  color: "#fff",
+                }}
+                data-testid="button-close-dish-modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Veg / Non-Veg badge */}
+              <div
+                className={`absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase`}
+                style={{
+                  backgroundColor: item.isVeg ? "rgba(22,163,74,0.9)" : "rgba(220,38,38,0.9)",
+                  color: "#fff",
+                  backdropFilter: "blur(4px)",
+                  border: item.isVeg ? "1px solid rgba(74,222,128,0.5)" : "1px solid rgba(252,165,165,0.4)",
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
               >
                 {item.isVeg ? <Leaf className="w-3 h-3" /> : <Flame className="w-3 h-3" />}
-                {item.isVeg ? "Vegetarian" : "Non-Vegetarian"}
+                {item.isVeg ? "Vegetarian" : "Non-Veg"}
               </div>
-            </div>
 
-            <div className="px-5 pb-8 -mt-4 space-y-5">
-              <div>
+              {/* Name + Price overlaid at bottom of image */}
+              <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
                 <h2
-                  className="text-xl font-bold leading-tight mb-1 uppercase tracking-widest"
-                  style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  className="font-bold leading-tight uppercase mb-2"
+                  style={{
+                    color: "#FFFFFF",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: "clamp(16px, 5vw, 22px)",
+                    letterSpacing: "0.08em",
+                    wordBreak: "break-word",
+                    textShadow: "0 2px 12px rgba(0,0,0,0.9)",
+                  }}
                   data-testid="text-dish-name"
                 >
                   {item.name}
                 </h2>
-                <p
-                  className="text-lg font-bold tracking-wide"
-                  style={{ color: "#E6C55A", fontFamily: "'DM Sans', sans-serif" }}
-                  data-testid="text-dish-price"
-                >
-                  {priceDisplay}
-                </p>
+                {/* Gold gradient price tag */}
+                <div className="inline-flex items-center gap-2">
+                  <div
+                    className="h-px w-6"
+                    style={{ background: "linear-gradient(90deg, #D4AF37, #E6C55A)" }}
+                  />
+                  <p
+                    className="text-base font-bold tracking-wider"
+                    style={{
+                      background: "linear-gradient(90deg, #D4AF37, #E6C55A)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      fontFamily: "'DM Sans', sans-serif",
+                    }}
+                    data-testid="text-dish-price"
+                  >
+                    {priceDisplay}
+                  </p>
+                  <div
+                    className="h-px w-6"
+                    style={{ background: "linear-gradient(90deg, #E6C55A, transparent)" }}
+                  />
+                </div>
               </div>
+            </div>
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
+            {/* Gold accent line */}
+            <div
+              className="w-full h-px"
+              style={{ background: "linear-gradient(90deg, transparent, #D4AF37, #E6C55A, transparent)" }}
+            />
 
-              <div>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
-                  data-testid="text-dish-description"
-                >
-                  {item.description || "No description available."}
-                </p>
-              </div>
+            {/* Content */}
+            <div className="px-5 py-5 space-y-5">
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
-
-              <div className="flex items-center gap-3">
+              {/* Description */}
+              {item.description && (
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: "rgba(212,175,55,0.15)" }}
+                  className="rounded-2xl px-4 py-3"
+                  style={{
+                    background: "rgba(212,175,55,0.06)",
+                    borderLeft: "3px solid #D4AF37",
+                  }}
+                >
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.7 }}
+                    data-testid="text-dish-description"
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              )}
+
+              {/* Prep time */}
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05))",
+                    border: "1px solid rgba(212,175,55,0.3)",
+                  }}
                 >
                   <Clock className="w-4 h-4" style={{ color: "#D4AF37" }} />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-widest mb-0.5" style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}>
+                  <p
+                    className="text-[10px] uppercase tracking-widest mb-0.5 font-semibold"
+                    style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     Preparation Time
                   </p>
-                  <p className="text-sm font-medium" style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}>
+                  <p
+                    className="text-sm font-semibold"
+                    style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     {PREP_TIME_PLACEHOLDER}
                   </p>
                 </div>
               </div>
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
+              {/* Divider */}
+              <div className="h-px" style={{ background: "rgba(212,175,55,0.12)" }} />
 
+              {/* Nutritional Contents */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4" style={{ color: "#D4AF37" }} />
-                  <h3 className="text-xs font-bold uppercase tracking-widest" style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-widest"
+                    style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     Nutritional Contents
                   </h3>
                 </div>
@@ -158,65 +235,106 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
                   {NUTRITION_PLACEHOLDER.map((n) => (
                     <div
                       key={n.label}
-                      className="rounded-xl p-2.5 text-center"
-                      style={{ backgroundColor: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.15)" }}
+                      className="rounded-xl p-3 text-center"
+                      style={{
+                        background: "rgba(212,175,55,0.06)",
+                        border: "1px solid rgba(212,175,55,0.14)",
+                      }}
                     >
-                      <p className="text-xs mb-0.5" style={{ color: "#DCD4C8", opacity: 0.6 }}>{n.label}</p>
-                      <p className="text-sm font-bold" style={{ color: "#DCD4C8" }}>{n.value}</p>
+                      <p
+                        className="text-[10px] uppercase tracking-wider mb-1"
+                        style={{ color: "rgba(220,212,200,0.5)", fontFamily: "'DM Sans', sans-serif" }}
+                      >
+                        {n.label}
+                      </p>
+                      <p
+                        className="text-base font-bold"
+                        style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
+                      >
+                        {n.value}
+                      </p>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs mt-2 text-center" style={{ color: "#DCD4C8", opacity: 0.4, fontFamily: "'DM Sans', sans-serif" }}>
+                <p
+                  className="text-[10px] mt-2 text-center uppercase tracking-wider"
+                  style={{ color: "rgba(212,175,55,0.35)", fontFamily: "'DM Sans', sans-serif" }}
+                >
                   Nutritional info will be available soon
                 </p>
               </div>
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
+              {/* Divider */}
+              <div className="h-px" style={{ background: "rgba(212,175,55,0.12)" }} />
 
+              {/* Allergens */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <AlertTriangle className="w-4 h-4" style={{ color: "#D4AF37" }} />
-                  <h3 className="text-xs font-bold uppercase tracking-widest" style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-widest"
+                    style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     Allergens
                   </h3>
                 </div>
                 <div
-                  className="rounded-xl p-3"
-                  style={{ backgroundColor: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.15)" }}
+                  className="rounded-xl px-4 py-3"
+                  style={{
+                    background: "rgba(212,175,55,0.06)",
+                    border: "1px solid rgba(212,175,55,0.14)",
+                  }}
                 >
-                  {ALLERGEN_PLACEHOLDER.map((a, i) => (
-                    <p key={i} className="text-sm" style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}>
-                      {a}
-                    </p>
-                  ))}
+                  <p
+                    className="text-sm"
+                    style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
+                  >
+                    {ALLERGEN_PLACEHOLDER}
+                  </p>
                 </div>
               </div>
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
+              {/* Divider */}
+              <div className="h-px" style={{ background: "rgba(212,175,55,0.12)" }} />
 
+              {/* Ingredients */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <ChefHat className="w-4 h-4" style={{ color: "#D4AF37" }} />
-                  <h3 className="text-xs font-bold uppercase tracking-widest" style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-widest"
+                    style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     Ingredients
                   </h3>
                 </div>
                 <div
-                  className="rounded-xl p-3"
-                  style={{ backgroundColor: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.15)" }}
+                  className="rounded-xl px-4 py-3"
+                  style={{
+                    background: "rgba(212,175,55,0.06)",
+                    border: "1px solid rgba(212,175,55,0.14)",
+                  }}
                 >
-                  <p className="text-sm" style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}>
+                  <p
+                    className="text-sm"
+                    style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
+                  >
                     {INGREDIENTS_PLACEHOLDER}
                   </p>
                 </div>
               </div>
 
-              <div className="h-px w-full" style={{ backgroundColor: "rgba(212,175,55,0.2)" }} />
+              {/* Divider */}
+              <div className="h-px" style={{ background: "rgba(212,175,55,0.12)" }} />
 
-              <div>
+              {/* Customization */}
+              <div className="pb-2">
                 <div className="flex items-center gap-2 mb-3">
                   <SlidersHorizontal className="w-4 h-4" style={{ color: "#D4AF37" }} />
-                  <h3 className="text-xs font-bold uppercase tracking-widest" style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}>
+                  <h3
+                    className="text-xs font-bold uppercase tracking-widest"
+                    style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  >
                     Customization
                   </h3>
                 </div>
@@ -224,17 +342,27 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
                   {CUSTOMIZATION_PLACEHOLDER.map((c, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-2 rounded-xl px-3 py-2.5"
-                      style={{ backgroundColor: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.15)" }}
+                      className="flex items-center gap-3 rounded-xl px-4 py-3"
+                      style={{
+                        background: "rgba(212,175,55,0.06)",
+                        border: "1px solid rgba(212,175,55,0.14)",
+                      }}
                     >
-                      <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#D4AF37" }} />
-                      <p className="text-sm" style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}>
+                      <div
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{ background: "linear-gradient(90deg, #D4AF37, #E6C55A)" }}
+                      />
+                      <p
+                        className="text-sm"
+                        style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
+                      >
                         {c}
                       </p>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
           </motion.div>
         </motion.div>

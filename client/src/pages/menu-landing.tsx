@@ -958,7 +958,7 @@ export default function MenuLanding() {
                   className="text-[11px] tracking-wide"
                   style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  {activeSmartSection === "today" ? "🌟 Tried and loved picks for today" : "👨‍🍳 Handpicked by our head chef"}
+                  {activeSmartSection === "today" ? "Tried and loved picks for today" : "Handpicked by our head chef"}
                 </p>
                 <div
                   className="inline-flex rounded-full p-0.5 items-center gap-0 flex-shrink-0"
