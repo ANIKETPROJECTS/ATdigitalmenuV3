@@ -5,7 +5,7 @@ import { X, Star, ChefHat } from "lucide-react";
 import type { MenuItem } from "@shared/schema";
 import chefsHatImg from "@assets/chefs-hat_1773556627617.png";
 import waiterImg from "@assets/waiter_1773555177013.png";
-import fallbackImg from "@assets/coming_soon_imagev2_1766811809828.jpg";
+import ProductCard from "@/components/product-card";
 
 export default function FloatingButtons() {
   const [waiterCalled, setWaiterCalled] = useState(false);
@@ -198,50 +198,9 @@ export default function FloatingButtons() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.04 }}
-                        className="rounded-xl overflow-hidden"
-                        style={{
-                          backgroundColor: "rgba(212,175,55,0.07)",
-                          border: "1px solid rgba(212,175,55,0.18)",
-                        }}
                         data-testid={`smart-item-${item._id?.toString()}`}
                       >
-                        <div className="relative overflow-hidden" style={{ height: "190px" }}>
-                          <img
-                            src={item.image || fallbackImg}
-                            alt={item.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = fallbackImg;
-                            }}
-                          />
-                          <div
-                            className={`absolute top-2 right-2 w-3.5 h-3.5 rounded-full border ${
-                              item.isVeg ? "bg-green-500 border-green-300" : "bg-red-500 border-red-300"
-                            }`}
-                          />
-                        </div>
-                        <div className="p-2">
-                          <p
-                            className="text-[11px] font-semibold tracking-wide uppercase leading-tight line-clamp-2 mb-0.5"
-                            style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
-                          >
-                            {item.name}
-                          </p>
-                          <p
-                            className="text-[10px] truncate mb-1"
-                            style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.75 }}
-                          >
-                            {item.description || ""}
-                          </p>
-                          <p
-                            className="text-xs font-bold"
-                            style={{ color: "#E6C55A", fontFamily: "'DM Sans', sans-serif" }}
-                          >
-                            {typeof item.price === "string" && item.price.includes("|")
-                              ? `₹${item.price.split("|")[0].trim()}`
-                              : `₹${item.price}`}
-                          </p>
-                        </div>
+                        <ProductCard item={item} />
                       </motion.div>
                     ))
                   )}
