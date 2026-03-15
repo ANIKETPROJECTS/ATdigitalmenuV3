@@ -770,7 +770,7 @@ export default function MenuLanding() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {mainCategories
             .filter((cat) => cat.id !== "wine" && !cat.hidden)
             .map((category, index) => {
