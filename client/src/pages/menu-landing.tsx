@@ -392,10 +392,9 @@ export default function MenuLanding() {
 
   const smartSections = useMemo(() => {
     const available = allMenuItems.filter(i => i.isAvailable);
-    const shuffled = [...available].sort(() => 0.5 - Math.random());
     return {
-      today: shuffled.slice(0, 10),
-      chef: shuffled.slice(10, 20),
+      today: available.filter(i => i.category?.toLowerCase() === "nibbles"),
+      chef: available.filter(i => i.category?.toLowerCase() === "salads"),
     };
   }, [allMenuItems]);
 
