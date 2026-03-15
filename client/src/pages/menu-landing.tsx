@@ -29,6 +29,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
+import waiterImg from "@assets/waiter_1773555177013.png";
 import premiumFoodImg from "@assets/image_1765866040643.png";
 import premiumBarImg from "@assets/stock_images/premium_whisky_cockt_68b3295e.jpg";
 import premiumDessertsImg from "@assets/image_1765866710467.png";
@@ -385,6 +386,7 @@ export default function MenuLanding() {
   const [, setLocation] = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const [waiterCalled, setWaiterCalled] = useState(false);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [showPopup, setShowPopup] = useState(false);
   const [customerName, setCustomerName] = useState("");
@@ -819,6 +821,107 @@ export default function MenuLanding() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Call Waiter Floating Button */}
+      <div className="fixed bottom-6 right-4 z-40 flex flex-col items-end gap-2">
+        <AnimatePresence>
+          {waiterCalled && (
+            <motion.button
+              key="cancel"
+              initial={{ opacity: 0, y: 8, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setWaiterCalled(false)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase"
+              style={{
+                backgroundColor: "rgba(30,20,0,0.92)",
+                border: "1px solid rgba(212,175,55,0.4)",
+                color: "#DCD4C8",
+                fontFamily: "'DM Sans', sans-serif",
+                backdropFilter: "blur(8px)",
+              }}
+              data-testid="button-cancel-waiter"
+            >
+              Cancel
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setWaiterCalled(!waiterCalled)}
+          className="flex items-center gap-2 pl-1 pr-4 py-1 rounded-full shadow-lg"
+          style={{
+            background: waiterCalled
+              ? "linear-gradient(135deg, #1a3a1a, #0f2a0f)"
+              : "linear-gradient(135deg, #3D3100, #1A1408)",
+            border: waiterCalled
+              ? "1.5px solid rgba(74,222,128,0.6)"
+              : "1.5px solid rgba(212,175,55,0.7)",
+            backdropFilter: "blur(10px)",
+            boxShadow: waiterCalled
+              ? "0 4px 24px rgba(74,222,128,0.25)"
+              : "0 4px 24px rgba(212,175,55,0.2)",
+          }}
+          data-testid="button-call-waiter"
+        >
+          <div
+            className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+            style={{ border: waiterCalled ? "2px solid rgba(74,222,128,0.7)" : "2px solid rgba(212,175,55,0.7)" }}
+          >
+            <img src={waiterImg} alt="Call Waiter" className="w-full h-full object-cover" />
+          </div>
+          <AnimatePresence mode="wait">
+            {waiterCalled ? (
+              <motion.div
+                key="called"
+                initial={{ opacity: 0, x: 6 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -6 }}
+                transition={{ duration: 0.18 }}
+                className="flex flex-col items-start"
+              >
+                <span
+                  className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
+                  style={{ color: "#4ade80", fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Waiter Called ✓
+                </span>
+                <span
+                  className="text-[9px] tracking-wide"
+                  style={{ color: "rgba(74,222,128,0.7)", fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  On the way!
+                </span>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="idle"
+                initial={{ opacity: 0, x: 6 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -6 }}
+                transition={{ duration: 0.18 }}
+                className="flex flex-col items-start"
+              >
+                <span
+                  className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
+                  style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Call Waiter
+                </span>
+                <span
+                  className="text-[9px] tracking-wide"
+                  style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Tap to request
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
     </div>
   );
 }
