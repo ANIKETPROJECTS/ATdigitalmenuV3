@@ -40,6 +40,7 @@ declare global {
 }
 
 import logoImg from "@assets/ATDIGITALMENUNOBG_1773511851120.png";
+import FloatingButtons from "@/components/floating-buttons";
 import sangriaImg from "@assets/image_1767545808245.png";
 import classicCocktailsImg from "@assets/image_1767545845465.png";
 import signatureCocktailsImg from "@assets/image_1767546048894.png";
@@ -511,6 +512,7 @@ export default function CategorySelection() {
           </div>
         )}
       </div>
+      <FloatingButtons />
     </div>
   );
 }

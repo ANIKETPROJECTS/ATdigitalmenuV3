@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import DishCard from "@/components/dish-card";
+import FloatingButtons from "@/components/floating-buttons";
 import { getMainCategory, getSubcategoryIds } from "@/lib/menu-categories";
 import type { MenuItem } from "@shared/schema";
 
@@ -381,6 +382,7 @@ export default function CategoryDetail() {
           </div>
         )}
       </div>
+      <FloatingButtons />
     </div>
   );
 }

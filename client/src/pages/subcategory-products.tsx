@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ProductCard from "@/components/product-card";
 import DishDetailModal from "@/components/dish-detail-modal";
+import FloatingButtons from "@/components/floating-buttons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { categoryTranslationMap } from "@/lib/translations";
 import { getMainCategory } from "@/lib/menu-categories";
@@ -334,6 +335,7 @@ export default function SubcategoryProducts() {
       </div>
 
       <DishDetailModal item={selectedDish} onClose={() => setSelectedDish(null)} />
+      <FloatingButtons />
     </div>
   );
 }
