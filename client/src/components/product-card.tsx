@@ -27,7 +27,7 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
       onClick={() => onClick?.(item)}
       data-testid={`card-dish-${item._id?.toString()}`}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ borderRadius: "10px 10px 0 0" }}>
+      <div className="relative w-full overflow-hidden" style={{ borderRadius: "10px 10px 0 0", height: "160px" }}>
         <img
           src={imageUrl}
           alt={item.name}
@@ -47,24 +47,20 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
           style={{
             color: "#D4AF37",
             fontFamily: "'DM Sans', sans-serif",
-            minHeight: "2.8em",
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
+            overflow: "hidden",
           }}
         >
           {item.name}
         </h3>
         <p
-          className="text-xs sm:text-sm leading-relaxed mb-1 line-clamp-2"
+          className="text-xs sm:text-sm leading-relaxed mb-1 truncate"
           style={{
             color: "#DCD4C8",
             fontFamily: "'DM Sans', sans-serif",
             opacity: 0.8,
-            minHeight: "3em",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
           }}
         >
           {item.description || "No description available"}
@@ -76,7 +72,6 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
               color: "#E6C55A",
               fontFamily: "'DM Sans', sans-serif",
               lineHeight: "1.2",
-              minHeight: "1.2em",
             }}
           >
             {typeof item.price === "string" && item.price.includes("|")
