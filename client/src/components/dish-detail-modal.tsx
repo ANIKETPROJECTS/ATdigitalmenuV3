@@ -39,7 +39,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
     <AnimatePresence>
       {item && (
         <motion.div
-          className="fixed inset-0 z-50 overflow-y-auto"
+          className="fixed inset-0 z-[60] overflow-y-auto"
           style={{ backgroundColor: "#1A1408" }}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}

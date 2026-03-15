@@ -1,17 +1,19 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { X, Star, ChefHat } from "lucide-react";
+import { ArrowLeft, Star, ChefHat } from "lucide-react";
 import type { MenuItem } from "@shared/schema";
 import chefsHatImg from "@assets/chefs-hat_1773556627617.png";
 import waiterImg from "@assets/waiter_1773555177013.png";
 import ProductCard from "@/components/product-card";
+import DishDetailModal from "@/components/dish-detail-modal";
 
 export default function FloatingButtons() {
   const [waiterCalled, setWaiterCalled] = useState(false);
   const [showSmartMenu, setShowSmartMenu] = useState(false);
   const [activeSmartSection, setActiveSmartSection] = useState<"today" | "chef">("today");
   const [smartVegFilter, setSmartVegFilter] = useState<"all" | "veg" | "non-veg">("all");
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const { data: allItems = [] } = useQuery<MenuItem[]>({ queryKey: ["/api/menu-items"] });
 
@@ -32,47 +34,46 @@ export default function FloatingButtons() {
 
   return (
     <>
-      {/* ── Smart Picks ── */}
-
-      {/* Backdrop */}
+      {/* ── Smart Picks full-screen panel ── */}
       <AnimatePresence>
         {showSmartMenu && (
           <motion.div
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowSmartMenu(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Slide-up panel */}
-      <AnimatePresence>
-        {showSmartMenu && (
-          <motion.div
-            className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl flex flex-col"
-            style={{
-              backgroundColor: "#1A1408",
-              border: "1px solid rgba(212,175,55,0.3)",
-              borderBottom: "none",
-              height: "96dvh",
-            }}
+            className="fixed inset-0 z-50 flex flex-col"
+            style={{ backgroundColor: "#1A1408" }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 280 }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
           >
-            {/* Handle */}
-            <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
-              <div className="w-10 h-1 rounded-full" style={{ backgroundColor: "rgba(212,175,55,0.3)" }} />
-            </div>
-
             {/* Header */}
-            <div className="px-5 pt-2 pb-3 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-3">
+            <div
+              className="flex items-center justify-between px-5 pt-12 pb-4 flex-shrink-0"
+              style={{ borderBottom: "1px solid rgba(212,175,55,0.15)" }}
+            >
+              {/* Golden back button */}
+              <button
+                onClick={() => setShowSmartMenu(false)}
+                className="flex items-center gap-2 px-3 py-2 rounded-full transition-all active:scale-95"
+                style={{
+                  background: "linear-gradient(135deg, #D4AF37, #E6C55A)",
+                  border: "none",
+                  boxShadow: "0 2px 12px rgba(212,175,55,0.4)",
+                }}
+                data-testid="button-close-smart-menu"
+              >
+                <ArrowLeft className="w-4 h-4" style={{ color: "#1A1408" }} />
+                <span
+                  className="text-xs font-bold uppercase tracking-widest"
+                  style={{ color: "#1A1408", fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Back
+                </span>
+              </button>
+
+              {/* Title */}
+              <div className="flex items-center gap-2">
                 <div
-                  className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+                  className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"
                   style={{ border: "2px solid rgba(212,175,55,0.6)" }}
                 >
                   <img src={chefsHatImg} alt="Smart Picks" className="w-full h-full object-cover" />
@@ -85,24 +86,20 @@ export default function FloatingButtons() {
                     Smart Picks
                   </h2>
                   <p
-                    className="text-[11px]"
-                    style={{ color: "#DCD4C8", opacity: 0.6, fontFamily: "'DM Sans', sans-serif" }}
+                    className="text-[10px]"
+                    style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
                   >
                     Not sure what to order? We've got you!
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => setShowSmartMenu(false)}
-                className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: "rgba(212,175,55,0.1)", color: "#DCD4C8" }}
-              >
-                <X className="w-4 h-4" />
-              </button>
+
+              {/* Spacer to balance layout */}
+              <div className="w-20" />
             </div>
 
             {/* Section Tabs */}
-            <div className="flex gap-2 px-5 pb-3 flex-shrink-0">
+            <div className="flex gap-2 px-5 pt-4 pb-3 flex-shrink-0">
               {[
                 { key: "today", label: "Today's Special", icon: <Star className="w-3.5 h-3.5" /> },
                 { key: "chef", label: "Chef's Special", icon: <ChefHat className="w-3.5 h-3.5" /> },
@@ -200,7 +197,7 @@ export default function FloatingButtons() {
                         transition={{ delay: idx * 0.04 }}
                         data-testid={`smart-item-${item._id?.toString()}`}
                       >
-                        <ProductCard item={item} />
+                        <ProductCard item={item} onClick={(i) => setSelectedItem(i)} />
                       </motion.div>
                     ))
                   )}
@@ -210,6 +207,9 @@ export default function FloatingButtons() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Dish Detail — opens on top of Smart Picks */}
+      <DishDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
 
       {/* Smart Picks floating button — bottom left */}
       <motion.button
