@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Phone, Clock, MapPin, QrCode, Copy, Check, ExternalLink, Star, Utensils, Calendar } from "lucide-react";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { X, Phone, Clock, QrCode, Copy, Check, ExternalLink, Utensils } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 import { mainCategories } from "@/lib/menu-categories";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { categoryTranslationMap } from "@/lib/translations";
 import { useState } from "react";
+import mapsImg from "@assets/logo_(1)_1773390711534.png";
 
 interface HamburgerMenuProps {
   isOpen: boolean;
@@ -12,8 +13,8 @@ interface HamburgerMenuProps {
   onCategoryClick: (categoryId: string) => void;
 }
 
-const UPI_ID = "barrelborn@upi";
-const PHONE = "+91 8278251111";
+const UPI_ID = "atdigitalmenu@upi";
+const PHONE = "+91 9619523254";
 
 export default function HamburgerMenu({
   isOpen,
@@ -53,8 +54,10 @@ export default function HamburgerMenu({
           />
 
           {/* Header */}
-          <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-4"
-            style={{ background: "linear-gradient(180deg, #1C1500 80%, transparent)", borderBottom: "1px solid rgba(212,175,55,0.15)" }}>
+          <div
+            className="sticky top-0 z-10 flex items-center justify-between px-5 py-4"
+            style={{ background: "linear-gradient(180deg, #1C1500 80%, transparent)", borderBottom: "1px solid rgba(212,175,55,0.15)" }}
+          >
             <div className="flex items-center gap-2">
               <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(180deg, #D4AF37, #E6C55A)" }} />
               <h2
@@ -76,7 +79,7 @@ export default function HamburgerMenu({
 
           <div className="px-4 pb-10 space-y-5 pt-3">
 
-            {/* Category Grid */}
+            {/* ── Category Grid ── */}
             <div className="grid grid-cols-2 gap-2.5">
               {mainCategories.filter((cat) => !cat.hidden).map((category, index) => {
                 const translationKey = categoryTranslationMap[category.id];
@@ -111,97 +114,36 @@ export default function HamburgerMenu({
               })}
             </div>
 
-            {/* Divider */}
+            {/* ── Divider ── */}
             <div className="flex items-center gap-3">
               <div className="flex-1 h-px" style={{ background: "rgba(212,175,55,0.15)" }} />
               <Utensils className="w-3.5 h-3.5" style={{ color: "rgba(212,175,55,0.4)" }} />
               <div className="flex-1 h-px" style={{ background: "rgba(212,175,55,0.15)" }} />
             </div>
 
-            {/* Restaurant Info */}
-            <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.18)" }}>
-              <div className="px-4 py-3" style={{ borderBottom: "1px solid rgba(212,175,55,0.12)" }}>
-                <p className="text-[10px] tracking-[0.25em] font-semibold uppercase" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
-                  Restaurant Info
-                </p>
-              </div>
-              <div className="p-4 space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.1)" }}>
-                    <MapPin className="h-3.5 w-3.5" style={{ color: "#D4AF37" }} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>Barrel Born</p>
-                    <p className="text-xs mt-0.5" style={{ color: "rgba(220,212,200,0.55)", fontFamily: "'DM Sans', sans-serif" }}>Thane, Maharashtra</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.1)" }}>
-                    <Phone className="h-3.5 w-3.5" style={{ color: "#D4AF37" }} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold tracking-wide uppercase mb-0.5" style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}>
-                      {t.contactUs}
-                    </p>
-                    <button
-                      onClick={() => window.open(`tel:${PHONE.replace(/\s/g, "")}`, "_self")}
-                      className="text-sm font-bold transition-opacity hover:opacity-80"
-                      style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      {PHONE}
-                    </button>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>
-                      {t.forReservations}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.1)" }}>
-                    <Clock className="h-3.5 w-3.5" style={{ color: "#D4AF37" }} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>11:00 AM – 11:30 PM</p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>{t.openAllDays}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.1)" }}>
-                    <FaInstagram className="h-3.5 w-3.5" style={{ color: "#D4AF37" }} />
-                  </div>
-                  <div>
-                    <button
-                      onClick={() => window.open("https://www.instagram.com/barrelborn_", "_blank", "noopener,noreferrer")}
-                      className="text-sm font-bold flex items-center gap-1 transition-opacity hover:opacity-80"
-                      style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      @barrelborn_
-                      <ExternalLink className="w-3 h-3" style={{ color: "rgba(212,175,55,0.5)" }} />
-                    </button>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>{t.followForUpdates}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* UPI / Payment Gateway */}
+            {/* ── Pay & Order (above Restaurant Info) ── */}
             <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.22)" }}>
               <div className="px-4 py-3" style={{ borderBottom: "1px solid rgba(212,175,55,0.12)", background: "rgba(212,175,55,0.05)" }}>
                 <div className="flex items-center gap-2">
                   <QrCode className="w-3.5 h-3.5" style={{ color: "#D4AF37" }} />
                   <p className="text-[10px] tracking-[0.25em] font-semibold uppercase" style={{ color: "rgba(212,175,55,0.7)", fontFamily: "'DM Sans', sans-serif" }}>
-                    Pay & Order
+                    Pay &amp; Order
                   </p>
                 </div>
               </div>
               <div className="p-4 space-y-3">
                 {/* UPI ID row */}
-                <div className="flex items-center justify-between rounded-xl px-4 py-3" style={{ background: "rgba(212,175,55,0.07)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                <div
+                  className="flex items-center justify-between rounded-xl px-4 py-3"
+                  style={{ background: "rgba(212,175,55,0.07)", border: "1px solid rgba(212,175,55,0.2)" }}
+                >
                   <div>
-                    <p className="text-[10px] tracking-widest uppercase mb-0.5" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>UPI ID</p>
-                    <p className="text-sm font-bold tracking-wide" style={{ color: "#D4AF37", fontFamily: "monospace" }}>{UPI_ID}</p>
+                    <p className="text-[10px] tracking-widest uppercase mb-0.5" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
+                      UPI ID
+                    </p>
+                    <p className="text-sm font-bold tracking-wide" style={{ color: "#D4AF37", fontFamily: "monospace" }}>
+                      {UPI_ID}
+                    </p>
                   </div>
                   <button
                     onClick={handleCopyUpi}
@@ -236,13 +178,13 @@ export default function HamburgerMenu({
                     >
                       <div className="flex flex-col items-center gap-2 pt-1">
                         <div
-                          className="w-40 h-40 rounded-xl flex items-center justify-center"
+                          className="w-44 h-44 rounded-xl flex items-center justify-center"
                           style={{ background: "white", border: "3px solid #D4AF37" }}
                         >
                           <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=${UPI_ID}&pn=BarrelBorn&cu=INR`}
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=176x176&data=upi://pay?pa=${UPI_ID}&pn=BarrelBorn&cu=INR`}
                             alt="UPI QR Code"
-                            className="w-36 h-36 object-contain rounded"
+                            className="w-40 h-40 object-contain rounded"
                           />
                         </div>
                         <p className="text-[10px] text-center tracking-wide" style={{ color: "rgba(220,212,200,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
@@ -268,59 +210,81 @@ export default function HamburgerMenu({
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="grid grid-cols-2 gap-2.5">
-              <button
-                onClick={() => window.open("https://maps.app.goo.gl/C7K6BijrGrvWTXyBA", "_blank")}
-                className="flex items-center gap-2.5 px-4 py-3 rounded-xl transition-all active:scale-95"
-                style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}
-                data-testid="button-get-directions"
-              >
-                <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: "#D4AF37" }} />
-                <div className="text-left">
-                  <p className="text-[11px] font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>Directions</p>
-                  <p className="text-[9px]" style={{ color: "rgba(220,212,200,0.4)", fontFamily: "'DM Sans', sans-serif" }}>Get on Maps</p>
-                </div>
-              </button>
+            {/* ── Restaurant Info ── */}
+            <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.18)" }}>
+              <div className="px-4 py-3" style={{ borderBottom: "1px solid rgba(212,175,55,0.12)" }}>
+                <p className="text-[10px] tracking-[0.25em] font-semibold uppercase" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
+                  Restaurant Info
+                </p>
+              </div>
+              <div className="p-4 space-y-4">
 
-              <button
-                onClick={() => window.open(`https://wa.me/918278251111?text=Hi! I'd like to make a reservation at Barrel Born.`, "_blank")}
-                className="flex items-center gap-2.5 px-4 py-3 rounded-xl transition-all active:scale-95"
-                style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}
-                data-testid="button-reserve-table"
-              >
-                <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: "#D4AF37" }} />
-                <div className="text-left">
-                  <p className="text-[11px] font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>Reserve</p>
-                  <p className="text-[9px]" style={{ color: "rgba(220,212,200,0.4)", fontFamily: "'DM Sans', sans-serif" }}>Book a table</p>
+                {/* Location — uses map icon from welcome screen */}
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center"
+                    style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                    <img src={mapsImg} alt="Location" className="w-8 h-8 object-contain" />
+                  </div>
+                  <div className="pt-1">
+                    <p className="text-sm font-bold" style={{ color: "#FFFFFF", fontFamily: "'DM Sans', sans-serif" }}>Barrel Born</p>
+                    <p className="text-xs mt-0.5" style={{ color: "rgba(220,212,200,0.55)", fontFamily: "'DM Sans', sans-serif" }}>Thane, Maharashtra</p>
+                  </div>
                 </div>
-              </button>
 
-              <button
-                onClick={() => window.open("https://g.page/r/CbKAeLOlg005EBM/review", "_blank")}
-                className="flex items-center gap-2.5 px-4 py-3 rounded-xl transition-all active:scale-95"
-                style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}
-                data-testid="button-leave-review"
-              >
-                <Star className="w-4 h-4 flex-shrink-0" style={{ color: "#D4AF37" }} />
-                <div className="text-left">
-                  <p className="text-[11px] font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>Review Us</p>
-                  <p className="text-[9px]" style={{ color: "rgba(220,212,200,0.4)", fontFamily: "'DM Sans', sans-serif" }}>On Google</p>
+                {/* Contact */}
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                    <Phone className="h-4 w-4" style={{ color: "#D4AF37" }} />
+                  </div>
+                  <div className="pt-1">
+                    <p className="text-xs font-semibold tracking-wide uppercase mb-0.5" style={{ color: "#FFFFFF", fontFamily: "'DM Sans', sans-serif" }}>
+                      {t.contactUs}
+                    </p>
+                    <button
+                      onClick={() => window.open(`tel:${PHONE.replace(/\s/g, "")}`, "_self")}
+                      className="text-sm font-bold transition-opacity hover:opacity-80"
+                      style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                    >
+                      {PHONE}
+                    </button>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>
+                      {t.forReservations}
+                    </p>
+                  </div>
                 </div>
-              </button>
 
-              <button
-                onClick={() => window.open(`https://wa.me/918278251111`, "_blank")}
-                className="flex items-center gap-2.5 px-4 py-3 rounded-xl transition-all active:scale-95"
-                style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}
-                data-testid="button-whatsapp"
-              >
-                <FaWhatsapp className="w-4 h-4 flex-shrink-0" style={{ color: "#D4AF37" }} />
-                <div className="text-left">
-                  <p className="text-[11px] font-bold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>WhatsApp</p>
-                  <p className="text-[9px]" style={{ color: "rgba(220,212,200,0.4)", fontFamily: "'DM Sans', sans-serif" }}>Chat with us</p>
+                {/* Hours */}
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                    <Clock className="h-4 w-4" style={{ color: "#D4AF37" }} />
+                  </div>
+                  <div className="pt-1">
+                    <p className="text-sm font-bold" style={{ color: "#FFFFFF", fontFamily: "'DM Sans', sans-serif" }}>11:00 AM – 11:30 PM</p>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>{t.openAllDays}</p>
+                  </div>
                 </div>
-              </button>
+
+                {/* Instagram */}
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.2)" }}>
+                    <FaInstagram className="h-4 w-4" style={{ color: "#D4AF37" }} />
+                  </div>
+                  <div className="pt-1">
+                    <button
+                      onClick={() => window.open("https://www.instagram.com/atdigitalmenu", "_blank", "noopener,noreferrer")}
+                      className="text-sm font-bold flex items-center gap-1 transition-opacity hover:opacity-80"
+                      style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                    >
+                      @atdigitalmenu
+                      <ExternalLink className="w-3 h-3" style={{ color: "rgba(212,175,55,0.5)" }} />
+                    </button>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(220,212,200,0.45)", fontFamily: "'DM Sans', sans-serif" }}>{t.followForUpdates}</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Footer */}
