@@ -27,6 +27,7 @@ export default function DishCard({ item }: DishCardProps) {
       }}
     >
       <div className="flex flex-col h-full">
+        {/* Image */}
         <div className="relative aspect-[4/3] overflow-hidden" style={{ borderRadius: "10px 10px 0 0" }}>
           <img
             src={imageUrl}
@@ -41,23 +42,59 @@ export default function DishCard({ item }: DishCardProps) {
           />
         </div>
 
-        <div className="p-2 md:p-3 flex-1 flex flex-col">
-          <div className="flex-1 space-y-1">
+        {/* Text content — fixed-height rows so all cards align */}
+        <div className="p-2 md:p-3 flex flex-col flex-1">
+
+          {/* Name — always exactly 2 lines tall */}
+          <div
+            style={{
+              height: "2.6em",
+              lineHeight: "1.3em",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             <h3
-              className="text-sm md:text-base font-semibold leading-tight line-clamp-2 tracking-wide uppercase"
-              style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+              className="text-sm md:text-base font-semibold tracking-wide uppercase"
+              style={{
+                color: "#D4AF37",
+                fontFamily: "'DM Sans', sans-serif",
+                lineHeight: "1.3em",
+              }}
             >
               {item.name}
             </h3>
+          </div>
+
+          {/* Description — always exactly 1 line tall */}
+          <div
+            className="mt-1"
+            style={{
+              height: "1.5em",
+              lineHeight: "1.5em",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 1,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             <p
-              className="text-xs md:text-sm leading-tight line-clamp-2"
-              style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.8 }}
+              className="text-xs md:text-sm"
+              style={{
+                color: "#DCD4C8",
+                fontFamily: "'DM Sans', sans-serif",
+                opacity: 0.8,
+                lineHeight: "1.5em",
+              }}
             >
               {item.description}
             </p>
           </div>
 
-          <div className="mt-2 pt-2" style={{ borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+          {/* Price — pushed to bottom */}
+          <div className="mt-auto pt-2" style={{ borderTop: "1px solid rgba(212,175,55,0.2)" }}>
             <div className="flex justify-center">
               <span
                 className="font-bold text-sm md:text-base tracking-wide"

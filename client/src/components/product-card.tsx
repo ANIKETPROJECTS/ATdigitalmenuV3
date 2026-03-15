@@ -27,6 +27,7 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
       onClick={() => onClick?.(item)}
       data-testid={`card-dish-${item._id?.toString()}`}
     >
+      {/* Image */}
       <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ borderRadius: "10px 10px 0 0", height: "190px" }}>
         <img
           src={imageUrl}
@@ -41,30 +42,58 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
         />
       </div>
 
+      {/* Text content — fixed-height rows so all cards align */}
       <div className="flex flex-col p-2 md:p-3">
-        <h3
-          className="text-sm sm:text-base font-semibold leading-tight mb-1 tracking-wide uppercase"
+
+        {/* Name — always exactly 2 lines tall */}
+        <div
           style={{
-            color: "#D4AF37",
-            fontFamily: "'DM Sans', sans-serif",
+            height: "2.6em",
+            lineHeight: "1.3em",
+            overflow: "hidden",
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
-            overflow: "hidden",
           }}
         >
-          {item.name}
-        </h3>
-        <p
-          className="text-xs sm:text-sm mb-2 truncate"
+          <h3
+            className="text-sm sm:text-base font-semibold tracking-wide uppercase"
+            style={{
+              color: "#D4AF37",
+              fontFamily: "'DM Sans', sans-serif",
+              lineHeight: "1.3em",
+            }}
+          >
+            {item.name}
+          </h3>
+        </div>
+
+        {/* Description — always exactly 1 line tall */}
+        <div
+          className="mt-1 mb-2"
           style={{
-            color: "#DCD4C8",
-            fontFamily: "'DM Sans', sans-serif",
-            opacity: 0.8,
+            height: "1.5em",
+            lineHeight: "1.5em",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: "vertical",
           }}
         >
-          {item.description || "No description available"}
-        </p>
+          <p
+            className="text-xs sm:text-sm"
+            style={{
+              color: "#DCD4C8",
+              fontFamily: "'DM Sans', sans-serif",
+              opacity: 0.8,
+              lineHeight: "1.5em",
+            }}
+          >
+            {item.description || "No description available"}
+          </p>
+        </div>
+
+        {/* Price */}
         <div className="pt-2" style={{ borderTop: "1px solid rgba(212,175,55,0.2)" }}>
           <span
             className="text-sm sm:text-base font-bold block tracking-wide"
