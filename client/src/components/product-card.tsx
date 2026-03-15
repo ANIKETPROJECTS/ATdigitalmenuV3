@@ -27,7 +27,7 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
       onClick={() => onClick?.(item)}
       data-testid={`card-dish-${item._id?.toString()}`}
     >
-      <div className="relative w-full overflow-hidden" style={{ borderRadius: "10px 10px 0 0", height: "160px" }}>
+      <div className="relative w-full overflow-hidden" style={{ borderRadius: "10px 10px 0 0", height: "190px" }}>
         <img
           src={imageUrl}
           alt={item.name}
