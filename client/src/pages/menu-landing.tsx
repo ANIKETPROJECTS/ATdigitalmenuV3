@@ -160,7 +160,6 @@ function CouponCard({
             width: 18,
             height: 18,
             backgroundColor: "#3D3100",
-            border: "1.5px solid #D4AF37",
             transform: "translateX(-50%)",
           }}
         />
@@ -186,7 +185,6 @@ function CouponCard({
             width: 18,
             height: 18,
             backgroundColor: "#3D3100",
-            border: "1.5px solid #D4AF37",
             transform: "translateX(-50%)",
           }}
         />
