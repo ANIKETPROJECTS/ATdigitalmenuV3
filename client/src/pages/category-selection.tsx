@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Menu as MenuIcon, X, Search, Mic, MicOff, Loader2 } from "lucide-react";
 import { useLocation, useParams } from "wouter";
 import { useState, useEffect, useMemo } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -164,6 +165,7 @@ export default function CategorySelection() {
   const categoryId = params.category || "mocktails";
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const { t } = useLanguage();
+  const { isDark } = useTheme();
   const [foodSearchQuery, setFoodSearchQuery] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] = useState<ISpeechRecognition | null>(null);
@@ -365,8 +367,11 @@ export default function CategorySelection() {
               {categoryId === "food" && (
                 <div 
                   className="inline-flex rounded-full p-0.5 items-center gap-0"
-                  style={{
-                    backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)"
+                  style={isDark ? {
+                    backgroundColor: vegFilter === "all" ? "rgba(255,255,255,0.1)" : vegFilter === "veg" ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)"
+                  } : {
+                    backgroundColor: vegFilter === "all" ? "rgba(0,0,0,0.07)" : vegFilter === "veg" ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.12)",
+                    border: "1px solid rgba(0,0,0,0.12)"
                   }}
                 >
                   <button
@@ -375,8 +380,8 @@ export default function CategorySelection() {
                     data-testid="filter-all"
                     style={
                       vegFilter === "all"
-                        ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        ? { backgroundColor: isDark ? "white" : "#1C1500", color: isDark ? "black" : "white", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.all}
@@ -388,7 +393,7 @@ export default function CategorySelection() {
                     style={
                       vegFilter === "veg"
                         ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.veg}
@@ -400,7 +405,7 @@ export default function CategorySelection() {
                     style={
                       vegFilter === "non-veg"
                         ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.nonVeg}

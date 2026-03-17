@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Search, Mic, MicOff, Loader2, ChevronDown, Filter } from "lucide-react";
 import { useLocation, useParams } from "wouter";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,6 +53,7 @@ export default function SubcategoryProducts() {
   const categoryId = params.category || "mocktails";
   const subcategoryId = params.subcategory || "";
   const { t } = useLanguage();
+  const { isDark } = useTheme();
 
   // Get filter from URL params, fallback to localStorage
   const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
@@ -243,8 +245,11 @@ export default function SubcategoryProducts() {
               <div className="flex items-center">
                 <div 
                   className="inline-flex rounded-full p-0.5 items-center gap-0"
-                  style={{
-                    backgroundColor: vegFilter === "all" ? "rgba(255, 255, 255, 0.1)" : vegFilter === "veg" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)"
+                  style={isDark ? {
+                    backgroundColor: vegFilter === "all" ? "rgba(255,255,255,0.1)" : vegFilter === "veg" ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)"
+                  } : {
+                    backgroundColor: vegFilter === "all" ? "rgba(0,0,0,0.07)" : vegFilter === "veg" ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.12)",
+                    border: "1px solid rgba(0,0,0,0.12)"
                   }}
                 >
                   <button
@@ -253,8 +258,8 @@ export default function SubcategoryProducts() {
                     data-testid="filter-all"
                     style={
                       vegFilter === "all"
-                        ? { backgroundColor: "white", color: "black", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        ? { backgroundColor: isDark ? "white" : "#1C1500", color: isDark ? "black" : "white", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.all}
@@ -266,7 +271,7 @@ export default function SubcategoryProducts() {
                     style={
                       vegFilter === "veg"
                         ? { backgroundColor: "#22C55E", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.veg}
@@ -278,7 +283,7 @@ export default function SubcategoryProducts() {
                     style={
                       vegFilter === "non-veg"
                         ? { backgroundColor: "#EF4444", color: "white", lineHeight: "1.2" }
-                        : { color: "#C9A55C", lineHeight: "1.2" }
+                        : { color: isDark ? "#C9A55C" : "#5A3E00", lineHeight: "1.2" }
                     }
                   >
                     {t.nonVeg}

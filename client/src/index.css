@@ -270,6 +270,11 @@
   --bb-search-br: rgba(139,98,0,0.25);
   --bb-input-text:#1a1a1a;
 }
+
+[data-theme="light"] body,
+[data-theme="light"] #root {
+  background-color: #FFFFFF;
+}
 /* ── end theme variables ────────────────────────────────────── */
 
 @keyframes coupon-marquee {
