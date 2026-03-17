@@ -512,7 +512,7 @@ export default function CategorySelection() {
           </div>
         )}
       </div>
-      <FloatingButtons />
+      <FloatingButtons isMenuOpen={showHamburgerMenu} />
     </div>
   );
 }

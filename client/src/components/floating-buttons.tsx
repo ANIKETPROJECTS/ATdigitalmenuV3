@@ -9,7 +9,11 @@ import waiterImg from "@assets/waiter_1773555177013.png";
 import ProductCard from "@/components/product-card";
 import DishDetailModal from "@/components/dish-detail-modal";
 
-export default function FloatingButtons() {
+interface FloatingButtonsProps {
+  isMenuOpen?: boolean;
+}
+
+export default function FloatingButtons({ isMenuOpen = false }: FloatingButtonsProps) {
   const { isDark } = useTheme();
   const [waiterCalled, setWaiterCalled] = useState(false);
   const [showSmartMenu, setShowSmartMenu] = useState(false);
@@ -208,6 +212,7 @@ export default function FloatingButtons() {
       <motion.button
         className="fixed bottom-6 left-4 z-40 flex items-center gap-2 pl-1 pr-4 py-1 rounded-full shadow-lg"
         style={{
+          display: !isDark && isMenuOpen ? "none" : undefined,
           background: isDark
             ? showSmartMenu ? "linear-gradient(135deg, #2a1a00, #1A1408)" : "linear-gradient(135deg, #3D3100, #1A1408)"
             : "#FFFFFF",
@@ -247,7 +252,7 @@ export default function FloatingButtons() {
       </motion.button>
 
       {/* ── Call Waiter ── */}
-      <div className="fixed bottom-6 right-4 z-40">
+      <div className="fixed bottom-6 right-4 z-40" style={{ display: !isDark && isMenuOpen ? "none" : undefined }}>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
