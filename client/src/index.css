@@ -271,6 +271,7 @@
   --bb-input-text:#1a1a1a;
 }
 
+[data-theme="light"],
 [data-theme="light"] body,
 [data-theme="light"] #root {
   background-color: #FFFFFF;

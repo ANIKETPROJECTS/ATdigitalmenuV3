@@ -38,6 +38,7 @@ const TIME_SLOTS = [
 ];
 
 function ReservationModal({ onClose }: { onClose: () => void }) {
+  const { isDark } = useTheme();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
@@ -73,9 +74,9 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
       <motion.div
         className="relative w-full sm:max-w-sm mx-0 sm:mx-4 rounded-t-3xl sm:rounded-3xl overflow-hidden"
         style={{
-          background: "linear-gradient(160deg, #1C1500 0%, #0F0C00 100%)",
-          border: "1.5px solid rgba(212,175,55,0.4)",
-          boxShadow: "0 0 60px rgba(212,175,55,0.12), 0 24px 64px rgba(0,0,0,0.7)",
+          background: isDark ? "linear-gradient(160deg, #1C1500 0%, #0F0C00 100%)" : "#FFFFFF",
+          border: isDark ? "1.5px solid rgba(212,175,55,0.4)" : "1.5px solid rgba(212,175,55,0.5)",
+          boxShadow: isDark ? "0 0 60px rgba(212,175,55,0.12), 0 24px 64px rgba(0,0,0,0.7)" : "0 0 40px rgba(212,175,55,0.12), 0 24px 64px rgba(0,0,0,0.15)",
           maxHeight: "92dvh",
           overflowY: "auto",
         }}
@@ -124,7 +125,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                     placeholder="Enter your name"
                     required
                     className="w-full bg-transparent outline-none text-sm font-light placeholder:opacity-35"
-                    style={{ color: "#E8D8B4", caretColor: "#D4AF37" }}
+                    style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", caretColor: "#D4AF37" }}
                     data-testid="input-reservation-name"
                   />
                 </div>
@@ -144,7 +145,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                     inputMode="numeric"
                     required
                     className="w-full bg-transparent outline-none text-sm font-light placeholder:opacity-35"
-                    style={{ color: "#E8D8B4", caretColor: "#D4AF37" }}
+                    style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", caretColor: "#D4AF37" }}
                     data-testid="input-reservation-phone"
                   />
                 </div>
@@ -164,7 +165,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                       required
                       min={new Date().toISOString().split("T")[0]}
                       className="w-full bg-transparent outline-none text-sm font-light"
-                      style={{ color: "#E8D8B4", caretColor: "#D4AF37", colorScheme: "dark" }}
+                      style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", caretColor: "#D4AF37", colorScheme: isDark ? "dark" : "light" }}
                       data-testid="input-reservation-date"
                     />
                   </div>
@@ -179,11 +180,11 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
                       className="w-full bg-transparent outline-none text-sm font-light appearance-none"
-                      style={{ color: "#E8D8B4" }}
+                      style={{ color: isDark ? "#E8D8B4" : "#1a1a1a" }}
                       data-testid="select-reservation-guests"
                     >
                       {[1,2,3,4,5,6,7,8,9,10].map((n) => (
-                        <option key={n} value={String(n)} style={{ background: "#1C1500" }}>{n} {n === 1 ? "Guest" : "Guests"}</option>
+                        <option key={n} value={String(n)} style={{ background: isDark ? "#1C1500" : "#FFFFFF", color: isDark ? "#E8D8B4" : "#1a1a1a" }}>{n} {n === 1 ? "Guest" : "Guests"}</option>
                       ))}
                     </select>
                     <ChevronDown className="w-3.5 h-3.5 absolute right-3 pointer-events-none" style={{ color: "rgba(212,175,55,0.5)" }} />
@@ -202,12 +203,12 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                     onChange={(e) => setTimeSlot(e.target.value)}
                     required
                     className="w-full bg-transparent outline-none text-sm font-light appearance-none"
-                    style={{ color: timeSlot ? "#E8D8B4" : "rgba(232,216,180,0.35)" }}
+                    style={{ color: timeSlot ? (isDark ? "#E8D8B4" : "#1a1a1a") : "rgba(232,216,180,0.35)" }}
                     data-testid="select-reservation-timeslot"
                   >
-                    <option value="" disabled style={{ background: "#1C1500" }}>Select a time slot</option>
+                    <option value="" disabled style={{ background: isDark ? "#1C1500" : "#FFFFFF", color: isDark ? "#E8D8B4" : "#1a1a1a" }}>Select a time slot</option>
                     {TIME_SLOTS.map((slot) => (
-                      <option key={slot} value={slot} style={{ background: "#1C1500" }}>{slot}</option>
+                      <option key={slot} value={slot} style={{ background: isDark ? "#1C1500" : "#FFFFFF", color: isDark ? "#E8D8B4" : "#1a1a1a" }}>{slot}</option>
                     ))}
                   </select>
                   <ChevronDown className="w-3.5 h-3.5 absolute right-3 pointer-events-none" style={{ color: "rgba(212,175,55,0.5)" }} />
@@ -225,7 +226,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
                     onChange={(e) => setOccasion(e.target.value)}
                     placeholder="Birthday, Anniversary, Business..."
                     className="w-full bg-transparent outline-none text-sm font-light placeholder:opacity-35"
-                    style={{ color: "#E8D8B4", caretColor: "#D4AF37" }}
+                    style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", caretColor: "#D4AF37" }}
                     data-testid="input-reservation-occasion"
                   />
                 </div>
@@ -263,8 +264,8 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
             >
               Reservation Confirmed!
             </h3>
-            <p className="text-sm mt-2 font-light" style={{ color: "rgba(220,212,200,0.7)", fontFamily: "'DM Sans', sans-serif" }}>
-              We're looking forward to hosting you, <span style={{ color: "#E8D8B4", fontWeight: 600 }}>{name}</span>.
+            <p className="text-sm mt-2 font-light" style={{ color: isDark ? "rgba(220,212,200,0.7)" : "rgba(0,0,0,0.6)", fontFamily: "'DM Sans', sans-serif" }}>
+              We're looking forward to hosting you, <span style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", fontWeight: 600 }}>{name}</span>.
             </p>
             <div className="w-full mt-5 rounded-2xl p-4 space-y-2" style={{ background: "rgba(212,175,55,0.07)", border: "1px solid rgba(212,175,55,0.2)" }}>
               {[
@@ -275,11 +276,11 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
               ].map((row) => (
                 <div key={row.label} className="flex justify-between items-center">
                   <span className="text-[11px] uppercase tracking-widest" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>{row.label}</span>
-                  <span className="text-[13px] font-semibold" style={{ color: "#E8D8B4", fontFamily: "'DM Sans', sans-serif" }}>{row.value}</span>
+                  <span className="text-[13px] font-semibold" style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", fontFamily: "'DM Sans', sans-serif" }}>{row.value}</span>
                 </div>
               ))}
             </div>
-            <p className="text-[10px] mt-4" style={{ color: "rgba(220,212,200,0.4)", fontFamily: "'DM Sans', sans-serif" }}>
+            <p className="text-[10px] mt-4" style={{ color: isDark ? "rgba(220,212,200,0.4)" : "rgba(0,0,0,0.4)", fontFamily: "'DM Sans', sans-serif" }}>
               Our team will contact you on <span style={{ color: "#D4AF37" }}>{phone}</span> to confirm.
             </p>
             <button
