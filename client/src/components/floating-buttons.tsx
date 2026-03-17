@@ -209,50 +209,52 @@ export default function FloatingButtons({ isMenuOpen = false }: FloatingButtonsP
       <DishDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
 
       {/* Smart Picks floating button — bottom left */}
-      <motion.button
-        className="fixed bottom-6 left-4 z-40 flex items-center gap-2 pl-1 pr-4 py-1 rounded-full shadow-lg"
-        style={{
-          display: !isDark && isMenuOpen ? "none" : undefined,
-          background: isDark
-            ? showSmartMenu ? "linear-gradient(135deg, #2a1a00, #1A1408)" : "linear-gradient(135deg, #3D3100, #1A1408)"
-            : "#FFFFFF",
-          border: isDark
-            ? showSmartMenu ? "1.5px solid rgba(212,175,55,0.9)" : "1.5px solid rgba(212,175,55,0.6)"
-            : "1.5px solid rgba(212,175,55,0.5)",
-          backdropFilter: "blur(10px)",
-          boxShadow: isDark
-            ? showSmartMenu ? "0 4px 24px rgba(212,175,55,0.35)" : "0 4px 24px rgba(212,175,55,0.15)"
-            : "0 4px 16px rgba(0,0,0,0.12)",
-        }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setShowSmartMenu(!showSmartMenu)}
-        data-testid="button-smart-menu"
-      >
-        <div
-          className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
-          style={{ border: "2px solid rgba(212,175,55,0.7)" }}
+      {(!isMenuOpen || isDark) && (
+        <motion.button
+          className="fixed bottom-6 left-4 z-40 flex items-center gap-2 pl-1 pr-4 py-1 rounded-full shadow-lg"
+          style={{
+            background: isDark
+              ? showSmartMenu ? "linear-gradient(135deg, #2a1a00, #1A1408)" : "linear-gradient(135deg, #3D3100, #1A1408)"
+              : "#FFFFFF",
+            border: isDark
+              ? showSmartMenu ? "1.5px solid rgba(212,175,55,0.9)" : "1.5px solid rgba(212,175,55,0.6)"
+              : "1.5px solid rgba(212,175,55,0.5)",
+            backdropFilter: "blur(10px)",
+            boxShadow: isDark
+              ? showSmartMenu ? "0 4px 24px rgba(212,175,55,0.35)" : "0 4px 24px rgba(212,175,55,0.15)"
+              : "0 4px 16px rgba(0,0,0,0.12)",
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowSmartMenu(!showSmartMenu)}
+          data-testid="button-smart-menu"
         >
-          <img src={chefsHatImg} alt="Smart Picks" className="w-full h-full object-cover" />
-        </div>
-        <div className="flex flex-col items-start">
-          <span
-            className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
-            style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
+          <div
+            className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+            style={{ border: "2px solid rgba(212,175,55,0.7)" }}
           >
-            Smart Picks
-          </span>
-          <span
-            className="text-[9px] tracking-wide"
-            style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
-          >
-            What to order?
-          </span>
-        </div>
-      </motion.button>
+            <img src={chefsHatImg} alt="Smart Picks" className="w-full h-full object-cover" />
+          </div>
+          <div className="flex flex-col items-start">
+            <span
+              className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
+              style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Smart Picks
+            </span>
+            <span
+              className="text-[9px] tracking-wide"
+              style={{ color: "rgba(212,175,55,0.6)", fontFamily: "'DM Sans', sans-serif" }}
+            >
+              What to order?
+            </span>
+          </div>
+        </motion.button>
+      )}
 
       {/* ── Call Waiter ── */}
-      <div className="fixed bottom-6 right-4 z-40" style={{ display: !isDark && isMenuOpen ? "none" : undefined }}>
+      {(!isMenuOpen || isDark) && (
+      <div className="fixed bottom-6 right-4 z-40">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -329,6 +331,7 @@ export default function FloatingButtons({ isMenuOpen = false }: FloatingButtonsP
           </AnimatePresence>
         </motion.button>
       </div>
+      )}
     </>
   );
 }
