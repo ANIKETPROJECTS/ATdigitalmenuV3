@@ -369,7 +369,7 @@ export default function HamburgerMenu({
                       whileTap={{ scale: 0.96 }}
                       onClick={() => handleCategoryClick(category.id)}
                       className="relative p-4 rounded-2xl text-left transition-all duration-200 overflow-hidden"
-                      style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#f5f5f5", border: isDark ? "1px solid rgba(212,175,55,0.22)" : "1px solid rgba(0,0,0,0.1)" }}
+                      style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.22)" : "1px solid rgba(0,0,0,0.1)" }}
                       data-testid={`button-category-${category.id}`}
                     >
                       <div className="absolute top-0 left-0 w-full h-[2px]" style={{ background: "linear-gradient(90deg, #D4AF37, #E6C55A)" }} />
@@ -396,7 +396,7 @@ export default function HamburgerMenu({
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setShowReservation(true)}
                 className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all"
-                style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#f5f5f5", border: isDark ? "1px solid rgba(212,175,55,0.28)" : "1px solid rgba(0,0,0,0.1)" }}
+                style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.28)" : "1px solid rgba(0,0,0,0.1)" }}
                 data-testid="button-open-reservation"
               >
                 <img src={reservationImg} alt="Reservation" className="w-12 h-12 object-contain flex-shrink-0" />
@@ -417,8 +417,8 @@ export default function HamburgerMenu({
               </motion.button>
 
               {/* ── Pay & Order ── */}
-              <div className="rounded-2xl overflow-hidden" style={{ background: isDark ? "rgba(212,175,55,0.04)" : "#f5f5f5", border: isDark ? "1px solid rgba(212,175,55,0.22)" : "1px solid rgba(0,0,0,0.1)" }}>
-                <div className="px-4 py-3" style={{ borderBottom: isDark ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(0,0,0,0.08)", background: isDark ? "rgba(212,175,55,0.05)" : "#ebebeb" }}>
+              <div className="rounded-2xl overflow-hidden" style={{ background: isDark ? "rgba(212,175,55,0.04)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.22)" : "1px solid rgba(0,0,0,0.1)" }}>
+                <div className="px-4 py-3" style={{ borderBottom: isDark ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(0,0,0,0.08)", background: isDark ? "rgba(212,175,55,0.05)" : "#FFFFFF" }}>
                   <div className="flex items-center gap-2">
                     <QrCode className="w-3.5 h-3.5" style={{ color: "#D4AF37" }} />
                     <p className="text-[10px] tracking-[0.25em] font-semibold uppercase" style={{ color: "rgba(212,175,55,0.7)", fontFamily: "'DM Sans', sans-serif" }}>
@@ -427,7 +427,7 @@ export default function HamburgerMenu({
                   </div>
                 </div>
                 <div className="p-4 space-y-3">
-                  <div className="flex items-center justify-between rounded-xl px-4 py-3" style={{ background: isDark ? "rgba(212,175,55,0.07)" : "#ebebeb", border: isDark ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(0,0,0,0.08)" }}>
+                  <div className="flex items-center justify-between rounded-xl px-4 py-3" style={{ background: isDark ? "rgba(212,175,55,0.07)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(0,0,0,0.1)" }}>
                     <div>
                       <p className="text-[10px] tracking-widest uppercase mb-0.5" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>UPI ID</p>
                       <p className="text-sm font-bold tracking-wide" style={{ color: "#D4AF37", fontFamily: "monospace" }}>{UPI_ID}</p>
@@ -446,7 +446,7 @@ export default function HamburgerMenu({
                   <button
                     onClick={() => setShowQr(!showQr)}
                     className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold tracking-widest uppercase transition-all active:scale-95"
-                    style={{ border: isDark ? "1px solid rgba(212,175,55,0.3)" : "1px solid rgba(0,0,0,0.1)", color: "#D4AF37", background: isDark ? "rgba(212,175,55,0.05)" : "#ebebeb" }}
+                    style={{ border: isDark ? "1px solid rgba(212,175,55,0.3)" : "1px solid rgba(0,0,0,0.1)", color: "#D4AF37", background: isDark ? "rgba(212,175,55,0.05)" : "#FFFFFF" }}
                     data-testid="button-show-qr"
                   >
                     <QrCode className="w-3.5 h-3.5" />
@@ -481,7 +481,7 @@ export default function HamburgerMenu({
                   <div className="flex items-center gap-2 pt-1">
                     {["GPay", "PhonePe", "Paytm", "BHIM"].map((app) => (
                       <div key={app} className="flex-1 text-center py-1.5 rounded-lg text-[10px] font-semibold"
-                        style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#ebebeb", border: isDark ? "1px solid rgba(212,175,55,0.15)" : "1px solid rgba(0,0,0,0.08)", color: isDark ? "rgba(220,212,200,0.5)" : "rgba(0,0,0,0.45)", fontFamily: "'DM Sans', sans-serif" }}>
+                        style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.15)" : "1px solid rgba(0,0,0,0.1)", color: isDark ? "rgba(220,212,200,0.5)" : "rgba(0,0,0,0.45)", fontFamily: "'DM Sans', sans-serif" }}>
                         {app}
                       </div>
                     ))}
@@ -490,8 +490,8 @@ export default function HamburgerMenu({
               </div>
 
               {/* ── Restaurant Info ── */}
-              <div className="rounded-2xl overflow-hidden" style={{ background: isDark ? "rgba(212,175,55,0.04)" : "#f5f5f5", border: isDark ? "1px solid rgba(212,175,55,0.18)" : "1px solid rgba(0,0,0,0.1)" }}>
-                <div className="px-4 py-3" style={{ borderBottom: isDark ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(0,0,0,0.08)", background: isDark ? "transparent" : "#ebebeb" }}>
+              <div className="rounded-2xl overflow-hidden" style={{ background: isDark ? "rgba(212,175,55,0.04)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.18)" : "1px solid rgba(0,0,0,0.1)" }}>
+                <div className="px-4 py-3" style={{ borderBottom: isDark ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(0,0,0,0.08)", background: isDark ? "transparent" : "#FFFFFF" }}>
                   <p className="text-[10px] tracking-[0.25em] font-semibold uppercase" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>
                     Restaurant Info
                   </p>
