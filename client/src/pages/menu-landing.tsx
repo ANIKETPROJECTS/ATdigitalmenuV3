@@ -913,7 +913,7 @@ export default function MenuLanding() {
         )}
       </AnimatePresence>
 
-      <FloatingButtons />
+      <FloatingButtons isMenuOpen={showHamburgerMenu} />
     </div>
   );
 }

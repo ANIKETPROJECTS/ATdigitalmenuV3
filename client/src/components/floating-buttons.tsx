@@ -209,7 +209,7 @@ export default function FloatingButtons({ isMenuOpen = false }: FloatingButtonsP
       <DishDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
 
       {/* Smart Picks floating button — bottom left */}
-      {(!isMenuOpen || isDark) && (
+      {!isMenuOpen && (
         <motion.button
           className="fixed bottom-6 left-4 z-40 flex items-center gap-2 pl-1 pr-4 py-1 rounded-full shadow-lg"
           style={{
@@ -253,7 +253,7 @@ export default function FloatingButtons({ isMenuOpen = false }: FloatingButtonsP
       )}
 
       {/* ── Call Waiter ── */}
-      {(!isMenuOpen || isDark) && (
+      {!isMenuOpen && (
       <div className="fixed bottom-6 right-4 z-40">
         <motion.button
           whileHover={{ scale: 1.05 }}
