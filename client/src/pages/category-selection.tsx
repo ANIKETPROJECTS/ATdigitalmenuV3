@@ -275,15 +275,15 @@ export default function CategorySelection() {
 
   if (!mainCategory) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#3D3100" }}>
-        <p style={{ color: "#DCD4C8" }}>Category not found</p>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "var(--bb-bg)" }}>
+        <p style={{ color: "var(--bb-text)" }}>Category not found</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#3D3100" }}>
-      <header className="sticky top-0 z-30 elegant-shadow" style={{ backgroundColor: "#3D3100" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bb-bg)" }}>
+      <header className="sticky top-0 z-30 elegant-shadow" style={{ backgroundColor: "var(--bb-bg)" }}>
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
@@ -292,7 +292,7 @@ export default function CategorySelection() {
                 size="icon"
                 onClick={() => setLocation("/menu")}
                 className="hover:bg-transparent flex-shrink-0"
-                style={{ color: "#DCD4C8" }}
+                style={{ color: "var(--bb-text)" }}
                 data-testid="button-back"
               >
                 <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -314,7 +314,7 @@ export default function CategorySelection() {
                 size="icon"
                 onClick={() => setShowHamburgerMenu(!showHamburgerMenu)}
                 className="hover:bg-transparent"
-                style={{ color: "#DCD4C8" }}
+                style={{ color: "var(--bb-text)" }}
                 data-testid="button-menu-toggle"
               >
                 {showHamburgerMenu ? (
@@ -339,7 +339,7 @@ export default function CategorySelection() {
           className="text-xl sm:text-2xl font-semibold tracking-widest uppercase text-center mb-2"
           style={{
             fontFamily: "'DM Sans', sans-serif",
-            color: "#D4AF37",
+            color: "var(--bb-gold)",
           }}
         >
           {mainCategory.displayLabel}
@@ -432,10 +432,10 @@ export default function CategorySelection() {
             {filteredItems.length === 0 ? (
               <div className="flex flex-col items-center justify-center min-h-[200px] text-center">
                 <Search className="h-12 w-12 mb-4" style={{ color: "rgba(212,175,55,0.4)" }} />
-                <h3 className="text-lg font-semibold mb-2 tracking-widest uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: "#D4AF37" }}>
+                <h3 className="text-lg font-semibold mb-2 tracking-widest uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--bb-gold)" }}>
                   {t.noItemsFound}
                 </h3>
-                <p className="text-sm" style={{ fontFamily: "'DM Sans', sans-serif", color: "#DCD4C8", opacity: 0.6 }}>
+                <p className="text-sm" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--bb-text)", opacity: 0.6 }}>
                   {t.noResultsFor} "{foodSearchQuery}"
                 </p>
               </div>

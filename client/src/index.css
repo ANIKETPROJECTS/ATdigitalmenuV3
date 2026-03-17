@@ -239,6 +239,39 @@
   }
 }
 
+/* ── Barrelborn theme variables ────────────────────────────── */
+/* Default = dark (current look). Light overrides applied below. */
+:root {
+  --bb-bg:        #3D3100;
+  --bb-card:      #1A1408;
+  --bb-card-alt:  #1C1500;
+  --bb-gold:      #D4AF37;
+  --bb-gold-2:    #E6C55A;
+  --bb-text:      #DCD4C8;
+  --bb-text-dim:  rgba(220,212,200,0.55);
+  --bb-border:    rgba(212,175,55,0.25);
+  --bb-header:    #3D3100;
+  --bb-search-bg: rgba(255,255,255,0.06);
+  --bb-search-br: rgba(212,175,55,0.3);
+  --bb-input-text:#E8D8B4;
+}
+
+[data-theme="light"] {
+  --bb-bg:        #FFFFFF;
+  --bb-card:      #F8F3E8;
+  --bb-card-alt:  #F0E9D8;
+  --bb-gold:      #8B6200;
+  --bb-gold-2:    #A87800;
+  --bb-text:      #2C1F00;
+  --bb-text-dim:  rgba(44,31,0,0.55);
+  --bb-border:    rgba(139,98,0,0.3);
+  --bb-header:    #FFFFFF;
+  --bb-search-bg: rgba(0,0,0,0.04);
+  --bb-search-br: rgba(139,98,0,0.3);
+  --bb-input-text:#2C1F00;
+}
+/* ── end theme variables ────────────────────────────────────── */
+
 @keyframes coupon-marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }

@@ -39,7 +39,7 @@ export default function FloatingButtons() {
         {showSmartMenu && (
           <motion.div
             className="fixed inset-0 z-50 flex flex-col"
-            style={{ backgroundColor: "#1A1408" }}
+            style={{ backgroundColor: "var(--bb-card)" }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
@@ -61,7 +61,7 @@ export default function FloatingButtons() {
                 <div>
                   <h2
                     className="text-lg font-bold tracking-widest uppercase"
-                    style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                    style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
                   >
                     Smart Picks
                   </h2>
@@ -109,7 +109,7 @@ export default function FloatingButtons() {
                       : {
                           backgroundColor: "rgba(212,175,55,0.08)",
                           border: "1px solid rgba(212,175,55,0.25)",
-                          color: "#D4AF37",
+                          color: "var(--bb-gold)",
                           fontFamily: "'DM Sans', sans-serif",
                         }
                   }
@@ -231,7 +231,7 @@ export default function FloatingButtons() {
         <div className="flex flex-col items-start">
           <span
             className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
-            style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+            style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
           >
             Smart Picks
           </span>
@@ -307,7 +307,7 @@ export default function FloatingButtons() {
               >
                 <span
                   className="text-[10px] font-semibold tracking-widest uppercase leading-tight"
-                  style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                  style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
                 >
                   Call Waiter
                 </span>

@@ -21,8 +21,8 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
       className="flex flex-col overflow-hidden cursor-pointer group transition-all duration-300"
       style={{
         borderRadius: "10px",
-        backgroundColor: "#1A1408",
-        border: "1px solid rgba(212,175,55,0.25)",
+        backgroundColor: "var(--bb-card)",
+        border: "1px solid var(--bb-border)",
       }}
       onClick={() => onClick?.(item)}
       data-testid={`card-dish-${item._id?.toString()}`}
@@ -59,7 +59,7 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
           <h3
             className="text-sm sm:text-base font-semibold tracking-wide uppercase"
             style={{
-              color: "#D4AF37",
+              color: "var(--bb-gold)",
               fontFamily: "'DM Sans', sans-serif",
               lineHeight: "1.3em",
             }}
@@ -72,7 +72,7 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
         <p
           className="text-xs sm:text-sm mt-1 mb-2 truncate"
           style={{
-            color: "#DCD4C8",
+            color: "var(--bb-text)",
             fontFamily: "'DM Sans', sans-serif",
             opacity: 0.8,
           }}
@@ -81,11 +81,11 @@ export default function ProductCard({ item, onClick }: ProductCardProps) {
         </p>
 
         {/* Price */}
-        <div className="pt-2" style={{ borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+        <div className="pt-2" style={{ borderTop: "1px solid var(--bb-border)" }}>
           <span
             className="text-sm sm:text-base font-bold block tracking-wide"
             style={{
-              color: "#E6C55A",
+              color: "var(--bb-gold-2)",
               fontFamily: "'DM Sans', sans-serif",
               lineHeight: "1.2",
             }}

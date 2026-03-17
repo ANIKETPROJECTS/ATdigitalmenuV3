@@ -180,15 +180,15 @@ export default function SubcategoryProducts() {
 
   if (!mainCategory || !currentSubcategory) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#3D3100" }}>
-        <p style={{ color: "#DCD4C8" }}>Category not found</p>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "var(--bb-bg)" }}>
+        <p style={{ color: "var(--bb-text)" }}>Category not found</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#3D3100" }}>
-      <header className="sticky top-0 z-30" style={{ backgroundColor: "#3D3100" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bb-bg)" }}>
+      <header className="sticky top-0 z-30" style={{ backgroundColor: "var(--bb-bg)" }}>
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between gap-2">
             <Button
@@ -207,7 +207,7 @@ export default function SubcategoryProducts() {
                 className="font-semibold text-center tracking-widest uppercase"
                 style={{
                   fontSize: "clamp(13px, 3.5vw, 19px)",
-                  color: "#D4AF37",
+                  color: "var(--bb-gold)",
                   fontFamily: "'DM Sans', sans-serif",
                 }}
               >
@@ -311,10 +311,10 @@ export default function SubcategoryProducts() {
         ) : filteredItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[300px] text-center px-4">
             <Search className="h-12 w-12 mb-4" style={{ color: "rgba(212,175,55,0.4)" }} />
-            <h3 className="text-lg font-semibold mb-2 tracking-widest uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: "#D4AF37" }}>
+            <h3 className="text-lg font-semibold mb-2 tracking-widest uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--bb-gold)" }}>
               {t.noItemsFound}
             </h3>
-            <p className="text-sm" style={{ fontFamily: "'DM Sans', sans-serif", color: "#DCD4C8", opacity: 0.6 }}>
+            <p className="text-sm" style={{ fontFamily: "'DM Sans', sans-serif", color: "var(--bb-text)", opacity: 0.6 }}>
               {searchQuery ? `${t.noResultsFor} "${searchQuery}"` : t.noItemsFound}
             </p>
           </div>

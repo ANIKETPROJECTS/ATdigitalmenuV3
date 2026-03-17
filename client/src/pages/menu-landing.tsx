@@ -171,23 +171,23 @@ function CouponCard({
         {/* RIGHT — code + condition on dark background */}
         <div
           className="flex flex-col justify-center px-4 py-3 text-left flex-1 min-w-0"
-          style={{ background: "#1A1408" }}
+          style={{ background: "var(--bb-card)" }}
         >
           <p
             className="text-sm font-black tracking-widest leading-none uppercase"
-            style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+            style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
           >
             {coupon.code}
           </p>
           <p
             className="text-[11px] mt-1.5 leading-snug tracking-wide"
-            style={{ color: "#E6C55A", opacity: 0.9 }}
+            style={{ color: "var(--bb-gold-2)", opacity: 0.9 }}
           >
             {coupon.subtitle}
           </p>
           <p
             className="text-[10px] mt-1 leading-snug tracking-wide"
-            style={{ color: "#DCD4C8", opacity: 0.55 }}
+            style={{ color: "var(--bb-text)", opacity: 0.55 }}
           >
             {coupon.description}
           </p>
@@ -209,7 +209,7 @@ function CouponsFullScreen({
       {open && (
         <motion.div
           className="fixed inset-0 z-50 flex flex-col"
-          style={{ backgroundColor: "#3D3100" }}
+          style={{ backgroundColor: "var(--bb-bg)" }}
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
@@ -232,14 +232,14 @@ function CouponsFullScreen({
             <div>
               <p
                 className="text-[10px] uppercase tracking-[0.3em] font-light mb-0.5"
-                style={{ color: "#D4AF37" }}
+                style={{ color: "var(--bb-gold)" }}
               >
                 Exclusive Offers
               </p>
               <h2
                 className="text-2xl font-black leading-none uppercase tracking-widest"
                 style={{
-                  color: "#D4AF37",
+                  color: "var(--bb-gold)",
                   fontFamily: "'Cormorant Garamond', serif",
                   letterSpacing: "0.18em",
                 }}
@@ -255,7 +255,7 @@ function CouponsFullScreen({
               style={{
                 background: "rgba(212,175,55,0.12)",
                 border: "1.5px solid rgba(212,175,55,0.45)",
-                color: "#D4AF37",
+                color: "var(--bb-gold)",
               }}
               data-testid="button-close-coupons-fullscreen"
             >
@@ -315,12 +315,12 @@ function CouponsFullScreen({
                   {/* RIGHT — details on dark background */}
                   <div
                     className="flex flex-col justify-center px-4 py-3 text-left flex-1 min-w-0"
-                    style={{ background: "#1A1408" }}
+                    style={{ background: "var(--bb-card)" }}
                   >
                     <p
                       className="text-sm font-black tracking-widest leading-none uppercase"
                       style={{
-                        color: "#D4AF37",
+                        color: "var(--bb-gold)",
                         fontFamily: "'DM Sans', sans-serif",
                       }}
                     >
@@ -328,13 +328,13 @@ function CouponsFullScreen({
                     </p>
                     <p
                       className="text-[11px] mt-1.5 leading-snug tracking-wide"
-                      style={{ color: "#E6C55A", opacity: 0.9 }}
+                      style={{ color: "var(--bb-gold-2)", opacity: 0.9 }}
                     >
                       {coupon.subtitle}
                     </p>
                     <p
                       className="text-[10px] mt-1 leading-snug tracking-wide"
-                      style={{ color: "#DCD4C8", opacity: 0.55 }}
+                      style={{ color: "var(--bb-text)", opacity: 0.55 }}
                     >
                       {coupon.description}
                     </p>
@@ -342,11 +342,11 @@ function CouponsFullScreen({
                     <div className="flex items-center gap-1.5 mt-2">
                       <Calendar
                         className="w-3 h-3 flex-shrink-0"
-                        style={{ color: "#D4AF37", opacity: 0.7 }}
+                        style={{ color: "var(--bb-gold)", opacity: 0.7 }}
                       />
                       <p
                         className="text-[9px] uppercase tracking-wider"
-                        style={{ color: "#D4AF37", opacity: 0.7 }}
+                        style={{ color: "var(--bb-gold)", opacity: 0.7 }}
                       >
                         {coupon.validity}
                       </p>
@@ -446,10 +446,10 @@ export default function MenuLanding() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#3D3100" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bb-bg)" }}>
       <header
         className="sticky top-0 z-30 elegant-shadow"
-        style={{ backgroundColor: "#3D3100" }}
+        style={{ backgroundColor: "var(--bb-bg)" }}
       >
         <div className="container mx-auto px-2 sm:px-4 py-5 sm:py-7">
           <div className="flex items-center justify-between">
@@ -459,7 +459,7 @@ export default function MenuLanding() {
                 size="icon"
                 onClick={() => setLocation("/")}
                 className="hover:bg-transparent flex-shrink-0"
-                style={{ color: "#DCD4C8" }}
+                style={{ color: "var(--bb-text)" }}
                 data-testid="button-back"
               >
                 <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -481,7 +481,7 @@ export default function MenuLanding() {
                 size="icon"
                 onClick={() => setShowHamburgerMenu(!showHamburgerMenu)}
                 className="hover:bg-transparent"
-                style={{ color: "#DCD4C8" }}
+                style={{ color: "var(--bb-text)" }}
                 data-testid="button-menu-toggle"
               >
                 {showHamburgerMenu ? (
@@ -539,7 +539,7 @@ export default function MenuLanding() {
               <button
                 onClick={handleSkip}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110"
-                style={{ background: "rgba(212,175,55,0.12)", color: "#D4AF37", border: "1px solid rgba(212,175,55,0.3)" }}
+                style={{ background: "rgba(212,175,55,0.12)", color: "var(--bb-gold)", border: "1px solid var(--bb-search-br)" }}
                 data-testid="button-close-popup"
               >
                 <X className="w-4 h-4" />
@@ -557,14 +557,14 @@ export default function MenuLanding() {
                 {/* Ornamental divider */}
                 <div className="flex items-center gap-3 w-full mb-4">
                   <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, #D4AF37)" }} />
-                  <span className="text-[10px] tracking-[0.3em] font-light" style={{ color: "#D4AF37" }}>WELCOME</span>
+                  <span className="text-[10px] tracking-[0.3em] font-light" style={{ color: "var(--bb-gold)" }}>WELCOME</span>
                   <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, #D4AF37)" }} />
                 </div>
 
                 {/* Headline */}
                 <h2
                   className="text-center font-black mb-1 leading-tight uppercase tracking-widest"
-                  style={{ color: "#D4AF37", fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", letterSpacing: "0.18em" }}
+                  style={{ color: "var(--bb-gold)", fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", letterSpacing: "0.18em" }}
                 >
                   Please Enter Your Details
                 </h2>
@@ -587,7 +587,7 @@ export default function MenuLanding() {
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Enter your name"
                         className="w-full bg-transparent outline-none text-sm font-light placeholder:opacity-40"
-                        style={{ color: "#E8D8B4", caretColor: "#D4AF37" }}
+                        style={{ color: "var(--bb-input-text)", caretColor: "#D4AF37" }}
                         data-testid="input-customer-name"
                       />
                     </div>

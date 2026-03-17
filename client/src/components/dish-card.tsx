@@ -22,8 +22,8 @@ export default function DishCard({ item }: DishCardProps) {
       className="overflow-hidden h-full flex flex-col transition-all duration-300"
       style={{
         borderRadius: "10px",
-        backgroundColor: "#1A1408",
-        border: "1px solid rgba(212,175,55,0.25)",
+        backgroundColor: "var(--bb-card)",
+        border: "1px solid var(--bb-border)",
       }}
     >
       <div className="flex flex-col h-full">
@@ -59,7 +59,7 @@ export default function DishCard({ item }: DishCardProps) {
             <h3
               className="text-sm md:text-base font-semibold tracking-wide uppercase"
               style={{
-                color: "#D4AF37",
+                color: "var(--bb-gold)",
                 fontFamily: "'DM Sans', sans-serif",
                 lineHeight: "1.3em",
               }}
@@ -72,7 +72,7 @@ export default function DishCard({ item }: DishCardProps) {
           <p
             className="text-xs md:text-sm mt-1 truncate"
             style={{
-              color: "#DCD4C8",
+              color: "var(--bb-text)",
               fontFamily: "'DM Sans', sans-serif",
               opacity: 0.8,
             }}
@@ -81,11 +81,11 @@ export default function DishCard({ item }: DishCardProps) {
           </p>
 
           {/* Price — pushed to bottom */}
-          <div className="mt-auto pt-2" style={{ borderTop: "1px solid rgba(212,175,55,0.2)" }}>
+          <div className="mt-auto pt-2" style={{ borderTop: "1px solid var(--bb-border)" }}>
             <div className="flex justify-center">
               <span
                 className="font-bold text-sm md:text-base tracking-wide"
-                style={{ color: "#E6C55A", fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: "var(--bb-gold-2)", fontFamily: "'DM Sans', sans-serif" }}
               >
                 {typeof item.price === "string" && item.price.includes("|")
                   ? item.price.split("|").map(p => `₹${p.trim()}`).join(" | ")

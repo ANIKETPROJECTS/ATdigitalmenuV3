@@ -40,7 +40,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
       {item && (
         <motion.div
           className="fixed inset-0 z-[60] overflow-y-auto"
-          style={{ backgroundColor: "#1A1408" }}
+          style={{ backgroundColor: "var(--bb-card)" }}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
@@ -141,7 +141,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
               >
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
+                  style={{ color: "var(--bb-text)", fontFamily: "'DM Sans', sans-serif", lineHeight: 1.75 }}
                   data-testid="text-dish-description"
                 >
                   {item.description}
@@ -151,7 +151,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
 
             {/* Prep time */}
             <div className="flex items-center gap-3">
-              <Clock className="w-4 h-4 flex-shrink-0" style={{ color: "#D4AF37" }} />
+              <Clock className="w-4 h-4 flex-shrink-0" style={{ color: "var(--bb-gold)" }} />
               <div>
                 <p
                   className="text-[10px] uppercase tracking-widest font-semibold"
@@ -161,7 +161,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
                 </p>
                 <p
                   className="text-sm font-semibold"
-                  style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
+                  style={{ color: "var(--bb-text)", fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {PREP_TIME_PLACEHOLDER}
                 </p>
@@ -175,7 +175,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
             <div>
               <h3
                 className="text-xs font-bold uppercase tracking-widest mb-3"
-                style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
               >
                 Nutritional Contents
               </h3>
@@ -197,7 +197,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
                     </p>
                     <p
                       className="text-base font-bold"
-                      style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif" }}
+                      style={{ color: "var(--bb-text)", fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {n.value}
                     </p>
@@ -219,7 +219,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
             <div>
               <h3
                 className="text-xs font-bold uppercase tracking-widest mb-3"
-                style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
               >
                 Allergens
               </h3>
@@ -232,7 +232,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
               >
                 <p
                   className="text-sm"
-                  style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
+                  style={{ color: "var(--bb-text)", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
                 >
                   {ALLERGEN_PLACEHOLDER}
                 </p>
@@ -246,7 +246,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
             <div>
               <h3
                 className="text-xs font-bold uppercase tracking-widest mb-3"
-                style={{ color: "#D4AF37", fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: "var(--bb-gold)", fontFamily: "'DM Sans', sans-serif" }}
               >
                 Ingredients
               </h3>
@@ -259,7 +259,7 @@ export default function DishDetailModal({ item, onClose }: DishDetailModalProps)
               >
                 <p
                   className="text-sm"
-                  style={{ color: "#DCD4C8", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
+                  style={{ color: "var(--bb-text)", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}
                 >
                   {INGREDIENTS_PLACEHOLDER}
                 </p>
