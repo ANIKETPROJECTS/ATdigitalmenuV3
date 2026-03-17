@@ -5,7 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format, isWithinInterval, startOfDay, endOfDay } from "date-fns";
-import { Loader2, LogOut, Users, Search, Calendar as CalendarIcon, ArrowUpDown } from "lucide-react";
+import { LogOut, Users, Search, Calendar as CalendarIcon, ArrowUpDown } from "lucide-react";
+import Lottie from "lottie-react";
+// @ts-ignore
+import waveAnimation from "@assets/Material_wave_loading_1773735960366.json";
 import type { Customer } from "@shared/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
@@ -231,8 +234,8 @@ export default function CustomerList() {
         <Card className="bg-[#222] border-[#B8986A] text-[#dcd4c8]">
           <CardContent className="pt-6">
             {isLoading ? (
-              <div className="flex justify-center py-12">
-                <Loader2 className="w-8 h-8 animate-spin text-[#B8986A]" />
+              <div className="flex justify-center py-8">
+                <Lottie animationData={waveAnimation} loop autoplay style={{ width: 120, height: 120 }} />
               </div>
             ) : (
               <div className="space-y-4">

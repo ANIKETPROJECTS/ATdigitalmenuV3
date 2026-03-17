@@ -5,7 +5,9 @@ import { ArrowLeft, Search, ChevronLeft, ChevronRight, Mic, MicOff } from "lucid
 import { useLocation, useParams } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Lottie from "lottie-react";
+// @ts-ignore
+import panAnimation from "@assets/Animaed_pan_1773736045253.json";
 import DishCard from "@/components/dish-card";
 import FloatingButtons from "@/components/floating-buttons";
 import { getMainCategory, getSubcategoryIds } from "@/lib/menu-categories";
@@ -349,13 +351,8 @@ export default function CategoryDetail() {
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center min-h-[300px]">
-            <DotLottieReact
-              src="https://lottie.host/85ae0d93-19f4-4b9f-a95c-f8db37d4cb5f/3vYJPJphYl.lottie"
-              loop
-              autoplay
-              style={{ width: 120, height: 120 }}
-            />
+          <div className="flex flex-col items-center justify-center min-h-[300px]">
+            <Lottie animationData={panAnimation} loop autoplay style={{ width: 160, height: 160 }} />
           </div>
         ) : filteredItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[300px] text-center px-4">

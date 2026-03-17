@@ -1,7 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Search, Mic, MicOff, Loader2, ChevronDown, Filter } from "lucide-react";
+import { ArrowLeft, Search, Mic, MicOff, ChevronDown, Filter } from "lucide-react";
+import Lottie from "lottie-react";
+// @ts-ignore
+import panAnimation from "@assets/Animaed_pan_1773736045253.json";
 import { useLocation, useParams } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Input } from "@/components/ui/input";
@@ -310,8 +313,8 @@ export default function SubcategoryProducts() {
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center min-h-[300px]">
-            <Loader2 className="h-12 w-12 animate-spin" style={{ color: "#C9A55C" }} />
+          <div className="flex flex-col items-center justify-center min-h-[300px]">
+            <Lottie animationData={panAnimation} loop autoplay style={{ width: 160, height: 160 }} />
           </div>
         ) : filteredItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[300px] text-center px-4">
