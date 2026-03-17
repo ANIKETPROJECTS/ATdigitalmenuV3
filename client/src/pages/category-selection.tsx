@@ -40,7 +40,7 @@ declare global {
   }
 }
 
-import logoImg from "@assets/ATDIGITALMENUNOBG_1773511851120.png";
+import logoImg from "@assets/barrelborn_logo_nobg_1773733915991.png";
 import FloatingButtons from "@/components/floating-buttons";
 import sangriaImg from "@assets/image_1767545808245.png";
 import classicCocktailsImg from "@assets/image_1767545845465.png";
