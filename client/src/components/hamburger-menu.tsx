@@ -225,7 +225,7 @@ export default function HamburgerMenu({
                   <div className="flex items-center justify-between gap-3 pt-1">
                     {PAYMENT_APPS.map((app) => (
                       <div key={app.name} className="flex-1 flex items-center justify-center">
-                        <img src={app.img} alt={app.name} className="w-10 h-10 object-contain" style={{ mixBlendMode: isDark ? "normal" : "multiply" }} />
+                        <img src={app.img} alt={app.name} className="w-16 h-16 object-contain" style={{ mixBlendMode: isDark ? "normal" : "multiply" }} />
                       </div>
                     ))}
                   </div>
