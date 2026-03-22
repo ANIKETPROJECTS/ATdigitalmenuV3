@@ -17,7 +17,7 @@ import reservationImg from "@assets/booking_1774207838605.png";
 import gpayImg from "@assets/—Pngtree—google_pay_payment_icon_vector_12256719_1774208085844.png";
 import phonepeImg from "@assets/phonepe_1774208135912.png";
 import paytmImg from "@assets/paytm_1774208173896.png";
-import bhimImg from "@assets/animation-png_512_1774208284046.png";
+import bhimImg from "@assets/icons8-bhim-480_1774210737246.png";
 
 interface HamburgerMenuProps {
   isOpen: boolean;
@@ -222,17 +222,10 @@ export default function HamburgerMenu({
                   </AnimatePresence>
 
                   {/* Payment app icons */}
-                  <div className="flex items-center gap-2 pt-1">
+                  <div className="flex items-center justify-between gap-3 pt-1">
                     {PAYMENT_APPS.map((app) => (
-                      <div
-                        key={app.name}
-                        className="flex-1 flex flex-col items-center justify-center py-1.5 rounded-lg gap-1"
-                        style={{ background: isDark ? "rgba(212,175,55,0.06)" : "#FFFFFF", border: isDark ? "1px solid rgba(212,175,55,0.15)" : "1px solid rgba(0,0,0,0.1)" }}
-                      >
-                        <img src={app.img} alt={app.name} className="w-7 h-7 object-contain" style={{ mixBlendMode: isDark ? "normal" : "multiply" }} />
-                        <span className="text-[9px] font-semibold" style={{ color: isDark ? "rgba(220,212,200,0.5)" : "rgba(0,0,0,0.55)", fontFamily: "'DM Sans', sans-serif" }}>
-                          {app.name}
-                        </span>
+                      <div key={app.name} className="flex-1 flex items-center justify-center">
+                        <img src={app.img} alt={app.name} className="w-10 h-10 object-contain" style={{ mixBlendMode: isDark ? "normal" : "multiply" }} />
                       </div>
                     ))}
                   </div>
