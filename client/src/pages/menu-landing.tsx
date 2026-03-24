@@ -548,12 +548,12 @@ export default function MenuLanding() {
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="px-7 pt-6 pb-7 flex flex-col items-center">
+              <div className="px-7 pt-2 pb-5 flex flex-col items-center">
                 {/* Logo */}
                 <img
                   src={logoImg}
                   alt="AT Digital Menu"
-                  className="w-52 object-contain mb-1"
+                  className="w-64 object-contain mb-0"
                   style={{ filter: isDark ? "drop-shadow(0 0 12px rgba(212,175,55,0.35))" : "none", mixBlendMode: isDark ? "normal" : "multiply" }}
                 />
 
@@ -566,8 +566,8 @@ export default function MenuLanding() {
 
                 {/* Headline */}
                 <h2
-                  className="text-center font-black mb-1 leading-tight uppercase tracking-widest"
-                  style={{ color: "var(--bb-gold)", fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", letterSpacing: "0.18em" }}
+                  className="text-center font-black mb-1 leading-tight uppercase tracking-widest whitespace-nowrap"
+                  style={{ color: "var(--bb-gold)", fontFamily: "'Cormorant Garamond', serif", fontSize: "15px", letterSpacing: "0.12em" }}
                 >
                   Please Enter Your Details
                 </h2>

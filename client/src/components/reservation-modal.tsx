@@ -254,8 +254,8 @@ export default function ReservationModal({ onClose }: ReservationModalProps) {
                 ...(occasion ? [{ label: "Occasion", value: occasion }] : []),
               ].map((row) => (
                 <div key={row.label} className="flex justify-between items-center">
-                  <span className="text-[11px] uppercase tracking-widest" style={{ color: "rgba(212,175,55,0.5)", fontFamily: "'DM Sans', sans-serif" }}>{row.label}</span>
-                  <span className="text-[13px] font-semibold" style={{ color: isDark ? "#E8D8B4" : "#1a1a1a", fontFamily: "'DM Sans', sans-serif" }}>{row.value}</span>
+                  <span className="text-[11px] uppercase tracking-widest" style={{ color: "#000000", fontFamily: "'DM Sans', sans-serif" }}>{row.label}</span>
+                  <span className="text-[13px] font-semibold" style={{ color: "#000000", fontFamily: "'DM Sans', sans-serif" }}>{row.value}</span>
                 </div>
               ))}
             </div>

@@ -13,6 +13,7 @@ import FloatingButtons from "@/components/floating-buttons";
 import { getMainCategory, getSubcategoryIds } from "@/lib/menu-categories";
 import type { MenuItem } from "@shared/schema";
 
+import atLogoImg from "@assets/₹999-_(15)_1774207200972.png";
 import nibblesImg from "@assets/image_1765861653339.png";
 import titbitsImg from "@assets/image_1765861734899.png";
 import soupsImg from "@assets/image_1765861784186.png";
@@ -237,16 +238,14 @@ export default function CategoryDetail() {
               <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
 
-            <h1
-              className="font-semibold tracking-widest uppercase text-center flex-1"
-              style={{
-                fontSize: "clamp(14px, 4vw, 20px)",
-                color: "#D4AF37",
-                fontFamily: "'DM Sans', sans-serif",
-              }}
-            >
-              {mainCategory.displayLabel}
-            </h1>
+            <div className="flex-1 flex justify-center">
+              <img
+                src={atLogoImg}
+                alt="AT Digital Menu"
+                className="object-contain"
+                style={{ height: "72px", width: "auto" }}
+              />
+            </div>
 
             <div className="w-9" />
           </div>

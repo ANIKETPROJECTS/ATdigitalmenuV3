@@ -321,7 +321,7 @@ export default function HamburgerMenu({
               <div className="h-px w-full" style={{ background: "rgba(212,175,55,0.1)" }} />
               <p
                 className="text-center text-[10px] tracking-widest cursor-pointer transition-opacity hover:opacity-80"
-                style={{ color: "rgba(212,175,55,0.3)", fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: "#000000", fontFamily: "'DM Sans', sans-serif" }}
                 onClick={() => window.open("https://www.atdigitalmenu.com", "_blank")}
               >
                 Powered by AT Digital Menu

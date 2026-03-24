@@ -305,7 +305,7 @@ export default function SubcategoryProducts() {
                 {isListening ? (
                   <MicOff className="h-4 w-4 text-red-500 animate-pulse" />
                 ) : (
-                  <Mic className="h-4 w-4 text-white" />
+                  <Mic className="h-4 w-4" style={{ color: "#C9A55C" }} />
                 )}
               </Button>
             )}
