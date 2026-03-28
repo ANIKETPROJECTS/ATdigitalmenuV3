@@ -191,6 +191,8 @@ export default function Welcome() {
             border: "none",
             color: "#3D3100",
             marginTop: "-70px",
+            position: "relative",
+            zIndex: 10,
             boxShadow: isDark
               ? "inset 0 0 0 2px #3D3100, 0 0 0 2px #FFFFFF, 0 0 0 4px #d4af37"
               : "inset 0 0 0 2px rgba(0,0,0,0.1), 0 0 0 2px #FFFFFF, 0 0 0 4px #d4af37",
